@@ -118,7 +118,15 @@
       .tl-item li { margin: 3px 0; }
 
       /* PROJECTS */
-      .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+      .filters { display: flex; flex-direction: column; gap: 13px; margin-bottom: 16px; }
+      .fgroup { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+      .flabel { font-family: var(--head); font-weight: 700; font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); min-width: 168px; }
+      .fchips { display: flex; flex-wrap: wrap; gap: 9px; }
+      .fselect { font-family: var(--head); font-weight: 600; font-size: 14px; padding: 9px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: #3a4754; cursor: pointer; min-width: 240px; }
+      .fselect:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(17,160,173,.15); }
+      .filter-count { color: var(--muted); font-size: 14px; margin-bottom: 26px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .freset { font-family: var(--head); font-weight: 600; font-size: 13px; padding: 5px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--teal); cursor: pointer; transition: border-color .2s; }
+      .freset:hover { border-color: var(--teal); }
       .filter { font-family: var(--head); font-weight: 600; font-size: 14px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: #3a4754; cursor: pointer; transition: all .2s; }
       .filter:hover { border-color: var(--teal); color: var(--teal); }
       .filter.active { background: var(--navy); color: #fff; border-color: var(--navy); }
@@ -288,9 +296,13 @@
           <div class="reveal">
             <span class="eyebrow">Réalisations</span>
             <h2 class="sec-title">Projets</h2>
-            <p class="sec-intro">Une sélection de projets open-source : cloud & DevOps, back-end & APIs, et applications web temps réel. Code disponible sur GitHub, démos en ligne pour les fronts statiques.</p>
+            <p class="sec-intro">Une sélection de projets open-source. Filtrez par rôle ou par compétence, et cliquez une carte pour ouvrir le détail complet (domaine, points clés, compétences liées et liens).</p>
           </div>
-          <div class="filters" id="filters"></div>
+          <div class="filters">
+            <div class="fgroup"><span class="flabel">Filtrer par rôle</span><div class="fchips" id="role-filters"></div></div>
+            <div class="fgroup"><span class="flabel">Filtrer par compétence</span><select id="skill-filter" class="fselect" aria-label="Filtrer par compétence"></select></div>
+          </div>
+          <p class="filter-count" id="filter-count"></p>
           <div class="projects-grid" id="projects-grid"></div>
           <div class="more-gh reveal">
             <a class="btn btn-primary" href="https://github.com/Moutacdie2000?tab=repositories" target="_blank" rel="noopener" style="color:#06141a">
@@ -504,6 +516,14 @@
 
       const CATS = { all: "Tous", cloud: "Cloud & DevOps", backend: "Backend & APIs", web: "Web & temps réel" };
       const CATCOLOR = { cloud: "var(--teal)", backend: "var(--blue)", web: "var(--violet)" };
+      // Rôles / postes (un projet peut servir plusieurs profils)
+      const ROLES = { all: "Tous les profils", devops: "DevOps & Cloud", backend: "Backend & APIs", fullstack: "Full-stack & Web", pod: "Python / Odoo / .NET" };
+      const ROLE_MAP = {
+        devops: ["aws-landing-zone-terraform", "eks-microservices-gitops", "aws-webapp-3tier-ha", "observability-devsecops", "serverless-event-driven-cdk", "buildpilot"],
+        backend: ["buildpilot", "boxoffice-ticketing", "bazar-marketplace", "pulse-monitoring", "addons", "taf-odoo15", "asso-stock", "serverless-event-driven-cdk", "trading-sim", "grid-mission-control"],
+        fullstack: ["buildpilot", "pulse-monitoring", "asso-stock", "trading-sim", "grid-mission-control", "rooms-draw-guess", "orbit-data-story", "sudoku", "projetgit"],
+        pod: ["boxoffice-ticketing", "bazar-marketplace", "addons", "taf-odoo15", "observability-devsecops"],
+      };
 
       // ----- Render -----
       const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
@@ -539,17 +559,35 @@
         c.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProject(p); } };
         return c;
       }
-      function renderProjects(filter) {
+      let curRole = "all", curSkill = "all";
+      const countEl = document.getElementById("filter-count");
+      function renderProjects() {
+        const list = PROJECTS.filter(p =>
+          (curRole === "all" || (ROLE_MAP[curRole] || []).includes(p.repo)) &&
+          (curSkill === "all" || (p.skills || []).concat(p.tags || []).join(" ").toLowerCase().includes(curSkill.toLowerCase())));
         grid.innerHTML = "";
-        PROJECTS.filter(p => filter === "all" || p.cat === filter).forEach(p => grid.appendChild(projectCard(p)));
+        list.forEach(p => grid.appendChild(projectCard(p)));
+        const filtered = curRole !== "all" || curSkill !== "all";
+        countEl.innerHTML = `<span>${list.length} projet${list.length > 1 ? "s" : ""} affiché${list.length > 1 ? "s" : ""}${filtered ? " (filtré)" : ""}</span>`;
+        if (filtered) {
+          const r = el("button", "freset", "Réinitialiser les filtres");
+          r.onclick = () => { curRole = "all"; curSkill = "all"; skillSel.value = "all"; roleWrap.querySelectorAll(".filter").forEach(f => f.classList.toggle("active", f.dataset.role === "all")); renderProjects(); };
+          countEl.appendChild(r);
+        }
+        if (!list.length) grid.innerHTML = `<p style="grid-column:1/-1;color:var(--muted)">Aucun projet ne correspond à cette combinaison de filtres.</p>`;
       }
-      const filters = document.getElementById("filters");
-      Object.entries(CATS).forEach(([k, label], i) => {
+      const roleWrap = document.getElementById("role-filters");
+      Object.entries(ROLES).forEach(([k, label], i) => {
         const b = el("button", "filter" + (i === 0 ? " active" : ""), label);
-        b.onclick = () => { document.querySelectorAll(".filter").forEach(f => f.classList.remove("active")); b.classList.add("active"); renderProjects(k); };
-        filters.appendChild(b);
+        b.dataset.role = k;
+        b.onclick = () => { curRole = k; roleWrap.querySelectorAll(".filter").forEach(f => f.classList.toggle("active", f.dataset.role === k)); renderProjects(); };
+        roleWrap.appendChild(b);
       });
-      renderProjects("all");
+      const skillSel = document.getElementById("skill-filter");
+      const SKILL_FILTERS = ["AWS", "Terraform", "Kubernetes", "Docker", "Helm", "ArgoCD", "GitOps", "CI/CD", "GitHub Actions", "Serverless", "Lambda", "Prometheus", "DevSecOps", "Python", "Django", "Celery", ".NET", "C#", "Node.js", "NestJS", "TypeScript", "React", "Next.js", "Astro", "WebSocket", "PostgreSQL", "Redis", "Prisma", "Odoo", "Stripe", "JWT", "RBAC", "D3", "C++"].sort((a, b) => a.localeCompare(b, "fr"));
+      skillSel.innerHTML = `<option value="all">Toutes les compétences</option>` + SKILL_FILTERS.map(s => `<option value="${s}">${s}</option>`).join("");
+      skillSel.onchange = () => { curSkill = skillSel.value; renderProjects(); };
+      renderProjects();
 
       // ----- Modale de détail projet -----
       const modal = document.getElementById("modal");
