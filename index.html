@@ -555,7 +555,7 @@
         c.style.setProperty("--cat", CATCOLOR[p.cat]);
         c.tabIndex = 0; c.setAttribute("role", "button"); c.setAttribute("aria-label", "Voir le détail du projet " + p.title);
         const feat = p.feat ? `<span class="pfeat">★ Mis en avant</span>` : "";
-        c.innerHTML = `<img class="pthumb" src="assets/projects/${p.repo}.png" alt="Aperçu du projet ${p.title}" loading="lazy" onerror="this.style.display='none'">
+        c.innerHTML = `<img class="pthumb" src="assets/projects/${p.repo}.png" alt="Aperçu du projet ${p.title}" decoding="async" onerror="this.style.display='none'">
           <div class="pbody">
             <div class="ptop"><span class="pcat">${CATS[p.cat]}</span>${feat}</div>
             <h3>${p.title}</h3><p class="pdesc">${p.desc}</p>
