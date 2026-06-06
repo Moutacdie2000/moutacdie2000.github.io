@@ -104,6 +104,15 @@
       .chips { display: flex; flex-wrap: wrap; gap: 7px; }
       .chip { background: var(--soft); color: #2c5a60; border: 1px solid #d9e6e8; border-radius: 8px; padding: 4px 10px; font-size: 12.5px; font-weight: 600; }
 
+      /* TECH GRID */
+      .tech-block { margin-bottom: 22px; }
+      .tech-block .tlabel { font-family: var(--head); font-weight: 700; font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-bottom: 13px; }
+      .tech-row { display: flex; flex-wrap: wrap; gap: 12px; }
+      .tech { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 96px; height: 92px; padding: 10px 6px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s, border-color .2s; }
+      .tech:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--teal); }
+      .tech img { width: 38px; height: 38px; object-fit: contain; }
+      .tech span { font-family: var(--head); font-weight: 600; font-size: 12px; color: #3a4754; text-align: center; line-height: 1.15; }
+
       /* EXPERIENCE */
       .timeline { position: relative; margin-left: 6px; }
       .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--teal-2), var(--line)); }
@@ -134,7 +143,14 @@
       .pcard { background: var(--card); border: 1px solid var(--line); border-radius: 17px; padding: 0; box-shadow: var(--shadow); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s; }
       .pthumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; display: block; background: linear-gradient(135deg, #16395a, #0f2a43); border-bottom: 1px solid var(--line); }
       .pbody { padding: 20px; display: flex; flex-direction: column; flex: 1; }
-      .m-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; border-radius: 14px; background: linear-gradient(135deg, #16395a, #0f2a43); margin-bottom: 18px; }
+      .m-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; border-radius: 14px; background: linear-gradient(135deg, #16395a, #0f2a43); }
+      .m-thumbwrap { position: relative; cursor: zoom-in; margin-bottom: 18px; display: block; }
+      .m-zoom { position: absolute; bottom: 10px; right: 10px; display: inline-flex; align-items: center; gap: 6px; background: rgba(8,20,32,.72); color: #fff; font-family: var(--head); font-weight: 600; font-size: 12px; padding: 6px 11px; border-radius: 9px; pointer-events: none; backdrop-filter: blur(2px); }
+      .lightbox { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 26px; background: rgba(6,16,24,.92); backdrop-filter: blur(6px); cursor: zoom-out; animation: mfade .2s ease; }
+      .lightbox[hidden] { display: none; }
+      .lightbox img { max-width: 94vw; max-height: 90vh; border-radius: 12px; box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+      .lb-x { position: fixed; top: 20px; right: 24px; width: 46px; height: 46px; border: 0; border-radius: 12px; background: rgba(255,255,255,.12); color: #fff; font-size: 27px; line-height: 1; cursor: pointer; transition: background .2s; }
+      .lb-x:hover { background: rgba(255,255,255,.22); }
       .pcard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--cat, var(--teal)); }
       .pcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
       .pcard .ptop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 10px; }
@@ -256,17 +272,15 @@
             <div class="reveal">
               <span class="eyebrow">Profil</span>
               <h2 class="sec-title">Du provisioning cloud jusqu'à la production</h2>
-              <p>Ingénieur <b>DevOps & Cloud</b> et développeur <b>back-end / full-stack</b>, certifié <b>AWS Solutions Architect Associate</b>. J'interviens sur toute la chaîne de valeur : architecture cloud (AWS, Azure), industrialisation (Terraform, Kubernetes, CI/CD, Ansible) et développement applicatif (Node.js / NestJS, .NET 8, Python / Django, Odoo).</p>
-              <p>J'ai conçu et déployé des <b>plateformes à forte charge</b> (paris sportifs & gaming, SaaS multi-tenant), des <b>socles cloud multi-comptes</b> et des <b>pipelines GitOps observables</b>. Mon fil conducteur : la fiabilité, la sécurité (DevSecOps) et la qualité, du code jusqu'à l'exploitation.</p>
-              <p>Actuellement <b>Consultant DevOps & Développeur Backend chez Corextreme Technologies</b>, je suis ouvert aux missions et opportunités en DevOps, Cloud et développement back-end.</p>
+              <p>Ingénieur <b>DevOps & Cloud</b> et développeur <b>back-end / full-stack</b>, certifié <b>AWS Solutions Architect Associate</b>. Je conçois et fiabilise des plateformes cloud-native, de l'infrastructure (Terraform, Kubernetes, CI/CD) au code (NestJS, .NET, Python / Django, Odoo).</p>
+              <p>Actuellement <b>Consultant DevOps & Développeur Backend chez Corextreme Technologies</b>. Ouvert aux missions en DevOps, Cloud et back-end.</p>
             </div>
             <ul class="quickfacts reveal">
               <li><span class="k">Localisation</span><span class="v">Yaoundé, Cameroun · ouvert au remote</span></li>
-              <li><span class="k">Rôle actuel</span><span class="v">Consultant DevOps & Dév. Backend, Corextreme</span></li>
+              <li><span class="k">Rôle actuel</span><span class="v">Consultant DevOps & Dev. Backend, Corextreme</span></li>
               <li><span class="k">Certification</span><span class="v">AWS Solutions Architect Associate (2024-2027)</span></li>
               <li><span class="k">Stack clé</span><span class="v">AWS · Terraform · Kubernetes · CI/CD · NestJS · .NET · Python</span></li>
               <li><span class="k">Langues</span><span class="v">Français (courant) · Anglais (technique)</span></li>
-              <li><span class="k">Formation</span><span class="v">Master 1 Génie Logiciel (UPAC) · DevOps & Cloud AWS</span></li>
             </ul>
           </div>
         </div>
@@ -277,9 +291,9 @@
           <div class="reveal">
             <span class="eyebrow">Compétences</span>
             <h2 class="sec-title">Stack technique</h2>
-            <p class="sec-intro">Une expertise transversale, du cloud et de l'infrastructure as code jusqu'au développement applicatif et à l'observabilité.</p>
+            <p class="sec-intro">Du cloud et de l'IaC au développement applicatif et à l'observabilité.</p>
           </div>
-          <div class="skills-grid" id="skills-grid"></div>
+          <div id="tech-grid"></div>
         </div>
       </section>
 
@@ -340,7 +354,7 @@
       <div class="modal-overlay" data-close></div>
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="m-title">
         <button class="modal-x" data-close aria-label="Fermer le détail">&times;</button>
-        <img class="m-thumb" id="m-thumb" alt="" onerror="this.style.display='none'" />
+        <div class="m-thumbwrap" id="m-thumbwrap"><img class="m-thumb" id="m-thumb" alt="" onerror="this.parentElement.style.display='none'" /><span class="m-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M9 3H3v6h2V5h4V3zm12 0h-6v2h4v4h2V3zM5 15H3v6h6v-2H5v-4zm16 0h-2v4h-4v2h6v-6z"/></svg>Agrandir</span></div>
         <div class="m-top"><span class="pcat" id="m-cat"></span><span class="m-domain" id="m-domain"></span></div>
         <h3 id="m-title"></h3>
         <p class="m-long" id="m-long"></p>
@@ -348,6 +362,11 @@
         <div class="m-section"><h4>Compétences & technologies liées</h4><div class="chips" id="m-skills"></div></div>
         <div class="m-links" id="m-links"></div>
       </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lb-x" data-lbclose aria-label="Fermer l'image">&times;</button>
+      <img id="lb-img" alt="Image du projet en grand" />
     </div>
 
     <footer>
@@ -361,19 +380,13 @@
     <script>
       document.documentElement.classList.add("js");
       // ----- Data -----
-      const SKILLS = [
-        ["Cloud", ["AWS (EC2, IAM, VPC, S3, RDS, EKS, Lambda, CloudFront, Amplify, CDK)", "Azure (Arc, hybride)"]],
-        ["Infrastructure as Code", ["Terraform", "Terragrunt", "CloudFormation / CDK", "Ansible"]],
-        ["Conteneurs & orchestration", ["Docker", "Kubernetes", "Helm", "ArgoCD (GitOps)", "Autoscaling HPA"]],
-        ["CI/CD", ["GitHub Actions", "GitLab CI", "Jenkins", "Build / test / deploy", "Releases"]],
-        ["Backend", ["Node.js / NestJS", ".NET 8 (ASP.NET, EF Core)", "Python (Django / DRF, Flask, Celery)", "Odoo 15 / 17 / 18"]],
-        ["APIs & temps réel", ["REST", "Microservices", "JWT / RBAC", "WebSockets / SignalR / Channels"]],
-        ["Front-end", ["React", "Next.js", "TypeScript", "Astro"]],
-        ["Données", ["PostgreSQL", "MySQL", "Redis", "DynamoDB", "Prisma", "EF Core"]],
-        ["Observabilité", ["Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry", "SLO / burn-rate"]],
-        ["Sécurité / DevSecOps", ["Secrets & durcissement", "Bastion SSH", "Trivy", "gitleaks", "tfsec", "Checkov", "Semgrep"]],
-        ["Langages", ["Python", "C#", "TypeScript / JavaScript", "SQL", "Bash", "C", "C++"]],
-        ["Méthodes", ["IaC", "GitOps", "Agile / Scrum", "Tests (pytest, xUnit, Jest)", "Code review"]],
+      // Technologies avec logos (devicon). [nom, slug, variante]
+      const TECH = [
+        ["Cloud & IaC", [["AWS", "amazonwebservices", "original-wordmark"], ["Azure", "azure", "original"], ["Terraform", "terraform", "original"], ["Ansible", "ansible", "original"]]],
+        ["Conteneurs & CI/CD", [["Docker", "docker", "original"], ["Kubernetes", "kubernetes", "plain"], ["Helm", "helm", "original"], ["ArgoCD", "argocd", "original"], ["GitHub Actions", "githubactions", "original"], ["GitLab CI", "gitlab", "original"], ["Jenkins", "jenkins", "original"]]],
+        ["Backend", [["Node.js", "nodejs", "original"], ["NestJS", "nestjs", "original"], [".NET 8", "dotnetcore", "original"], ["C#", "csharp", "original"], ["Python", "python", "original"], ["Django", "django", "plain"], ["Odoo", "https://cdn.simpleicons.org/odoo", ""]]],
+        ["Front-end & Données", [["React", "react", "original"], ["Next.js", "nextjs", "original"], ["TypeScript", "typescript", "original"], ["Astro", "astro", "original"], ["PostgreSQL", "postgresql", "original"], ["Redis", "redis", "original"], ["Prisma", "prisma", "original"]]],
+        ["Observabilité & OS", [["Prometheus", "prometheus", "original"], ["Grafana", "grafana", "original"], ["Linux", "linux", "original"], ["Git", "git", "original"], ["Bash", "bash", "original"]]],
       ];
 
       const EXPERIENCE = [
@@ -532,11 +545,16 @@
       // ----- Render -----
       const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 
-      const sg = document.getElementById("skills-grid");
-      SKILLS.forEach(([name, items]) => {
-        const card = el("div", "skill-card reveal");
-        card.innerHTML = `<h3><span class="bar"></span>${name}</h3><div class="chips">${items.map(i => `<span class="chip">${i}</span>`).join("")}</div>`;
-        sg.appendChild(card);
+      const sg = document.getElementById("tech-grid");
+      const devicon = (slug, v) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${slug}/${slug}-${v}.svg`;
+      TECH.forEach(([name, items]) => {
+        const block = el("div", "tech-block reveal");
+        const tiles = items.map(([n, slug, v]) => {
+          const src = slug.startsWith("http") ? slug : devicon(slug, v);
+          return `<div class="tech"><img src="${src}" alt="${n}" loading="lazy" onerror="this.style.display='none'"><span>${n}</span></div>`;
+        }).join("");
+        block.innerHTML = `<div class="tlabel">${name}</div><div class="tech-row">${tiles}</div>`;
+        sg.appendChild(block);
       });
 
       const tl = document.getElementById("timeline");
@@ -600,7 +618,7 @@
       const modal = document.getElementById("modal");
       function openProject(p) {
         modal.style.setProperty("--cat", CATCOLOR[p.cat]);
-        const mt = document.getElementById("m-thumb"); mt.style.display = ""; mt.src = "assets/projects/" + p.repo + ".png";
+        document.getElementById("m-thumbwrap").style.display = ""; document.getElementById("m-thumb").src = "assets/projects/" + p.repo + ".png";
         document.getElementById("m-cat").textContent = CATS[p.cat];
         document.getElementById("m-domain").textContent = p.domain || "";
         document.getElementById("m-title").textContent = p.title;
@@ -615,7 +633,14 @@
       }
       function closeModal() { modal.hidden = true; document.body.classList.remove("modal-open"); }
       modal.querySelectorAll("[data-close]").forEach(x => x.onclick = closeModal);
-      addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
+
+      // Lightbox : agrandir l'image du projet sans redirection
+      const lightbox = document.getElementById("lightbox"), lbImg = document.getElementById("lb-img");
+      function openLightbox(src) { if (!src) return; lbImg.src = src; lightbox.hidden = false; document.body.classList.add("modal-open"); }
+      function closeLightbox() { lightbox.hidden = true; if (modal.hidden) document.body.classList.remove("modal-open"); }
+      document.getElementById("m-thumbwrap").addEventListener("click", () => openLightbox(document.getElementById("m-thumb").src));
+      lightbox.addEventListener("click", (e) => { if (e.target === lightbox || e.target.closest("[data-lbclose]")) closeLightbox(); });
+      addEventListener("keydown", (e) => { if (e.key === "Escape") { if (!lightbox.hidden) closeLightbox(); else if (!modal.hidden) closeModal(); } });
 
       // ----- Interactions -----
       document.getElementById("year").textContent = new Date().getFullYear();
