@@ -131,7 +131,10 @@
       .filter:hover { border-color: var(--teal); color: var(--teal); }
       .filter.active { background: var(--navy); color: #fff; border-color: var(--navy); }
       .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 22px; }
-      .pcard { background: var(--card); border: 1px solid var(--line); border-radius: 17px; padding: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s; }
+      .pcard { background: var(--card); border: 1px solid var(--line); border-radius: 17px; padding: 0; box-shadow: var(--shadow); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s; }
+      .pthumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; display: block; background: #0f2a43; border-bottom: 1px solid var(--line); }
+      .pbody { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+      .m-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; border-radius: 14px; background: #0f2a43; margin-bottom: 18px; }
       .pcard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--cat, var(--teal)); }
       .pcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
       .pcard .ptop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 10px; }
@@ -337,6 +340,7 @@
       <div class="modal-overlay" data-close></div>
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="m-title">
         <button class="modal-x" data-close aria-label="Fermer le détail">&times;</button>
+        <img class="m-thumb" id="m-thumb" alt="" onerror="this.style.display='none'" />
         <div class="m-top"><span class="pcat" id="m-cat"></span><span class="m-domain" id="m-domain"></span></div>
         <h3 id="m-title"></h3>
         <p class="m-long" id="m-long"></p>
@@ -551,10 +555,13 @@
         c.style.setProperty("--cat", CATCOLOR[p.cat]);
         c.tabIndex = 0; c.setAttribute("role", "button"); c.setAttribute("aria-label", "Voir le détail du projet " + p.title);
         const feat = p.feat ? `<span class="pfeat">★ Mis en avant</span>` : "";
-        c.innerHTML = `<div class="ptop"><span class="pcat">${CATS[p.cat]}</span>${feat}</div>
-          <h3>${p.title}</h3><p class="pdesc">${p.desc}</p>
-          <div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join("")}</div>
-          <div class="phint">Voir le détail ${arrowIco}</div>`;
+        c.innerHTML = `<img class="pthumb" src="assets/projects/${p.repo}.png" alt="Aperçu du projet ${p.title}" loading="lazy" onerror="this.style.display='none'">
+          <div class="pbody">
+            <div class="ptop"><span class="pcat">${CATS[p.cat]}</span>${feat}</div>
+            <h3>${p.title}</h3><p class="pdesc">${p.desc}</p>
+            <div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join("")}</div>
+            <div class="phint">Voir le détail ${arrowIco}</div>
+          </div>`;
         c.onclick = () => openProject(p);
         c.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProject(p); } };
         return c;
@@ -593,6 +600,7 @@
       const modal = document.getElementById("modal");
       function openProject(p) {
         modal.style.setProperty("--cat", CATCOLOR[p.cat]);
+        const mt = document.getElementById("m-thumb"); mt.style.display = ""; mt.src = "assets/projects/" + p.repo + ".png";
         document.getElementById("m-cat").textContent = CATS[p.cat];
         document.getElementById("m-domain").textContent = p.domain || "";
         document.getElementById("m-title").textContent = p.title;
