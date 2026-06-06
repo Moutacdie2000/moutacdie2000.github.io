@@ -42,8 +42,8 @@
       .nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
       .brand { display: flex; align-items: center; gap: 11px; font-family: var(--head); font-weight: 700; color: var(--navy); }
       .mono { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-weight: 800; font-size: 16px; color: #061018; background: linear-gradient(135deg, var(--teal-2), var(--teal)); }
-      .brand b { font-weight: 700; font-size: 16px; }
-      .brand span { display: block; font-family: var(--sans); font-weight: 600; font-size: 11.5px; color: var(--muted); letter-spacing: .02em; }
+      .brand-txt b { font-weight: 700; font-size: 15.5px; color: var(--navy); white-space: nowrap; }
+      .brand-sub { display: block; font-family: var(--sans); font-weight: 600; font-size: 11.5px; color: var(--muted); letter-spacing: .02em; }
       .nav-links { display: flex; align-items: center; gap: 26px; }
       .nav-links a { font-weight: 600; font-size: 15px; color: #3a4754; transition: color .2s; }
       .nav-links a:hover { color: var(--teal); }
@@ -141,6 +141,27 @@
       .plink.demo { background: var(--soft); color: var(--teal); border: 1px solid #cfe5e8; }
       .plink.demo:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
       .more-gh { text-align: center; margin-top: 34px; }
+      .pcard { cursor: pointer; }
+      .pcard .phint { margin-top: auto; padding-top: 12px; font-family: var(--head); font-weight: 600; font-size: 13px; color: var(--cat, var(--teal)); display: inline-flex; align-items: center; gap: 5px; }
+
+      /* MODAL */
+      body.modal-open { overflow: hidden; }
+      .modal { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 18px; }
+      .modal[hidden] { display: none; }
+      .modal-overlay { position: absolute; inset: 0; background: rgba(8, 20, 32, .62); backdrop-filter: blur(4px); animation: mfade .2s ease; }
+      .modal-card { position: relative; background: #fff; border-radius: 20px; width: min(680px, 100%); max-height: 88vh; overflow-y: auto; padding: 34px clamp(20px, 4vw, 38px); box-shadow: var(--shadow-lg); border-top: 5px solid var(--cat, var(--teal)); animation: mpop .25s cubic-bezier(.2,.8,.3,1); }
+      .modal-x { position: absolute; top: 12px; right: 14px; width: 38px; height: 38px; border: 0; border-radius: 10px; background: var(--soft); color: var(--navy); font-size: 24px; line-height: 1; cursor: pointer; transition: background .2s; }
+      .modal-x:hover { background: #dde8eb; }
+      .m-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-right: 44px; }
+      .m-domain { font-family: var(--head); font-weight: 600; font-size: 13px; color: var(--muted); }
+      .modal-card h3 { font-size: clamp(21px, 3.4vw, 26px); margin: 13px 0 11px; }
+      .m-long { color: #41505d; font-size: 15.5px; line-height: 1.65; }
+      .m-section h4 { font-family: var(--head); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--teal); margin: 20px 0 10px; }
+      .m-section ul { margin: 0 0 0 18px; color: #41505d; }
+      .m-section li { margin: 5px 0; }
+      .m-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      @keyframes mfade { from { opacity: 0 } to { opacity: 1 } }
+      @keyframes mpop { from { opacity: 0; transform: translateY(16px) scale(.985) } to { opacity: 1; transform: none } }
 
       /* CONTACT */
       .contact { background: linear-gradient(160deg, #0c2032, #0f2a43 60%, #0a1a2a); color: #eaf2f6; border-radius: 26px; padding: 56px clamp(24px, 5vw, 64px); position: relative; overflow: hidden; }
@@ -176,7 +197,7 @@
   <body>
     <nav id="nav">
       <div class="wrap nav-in">
-        <a href="#top" class="brand"><span class="mono">NM</span><span><b>Noumabeu Moutacdie Jordan</b><span>DevOps & Cloud · Développeur</span></span></a>
+        <a href="#top" class="brand"><span class="mono">NM</span><span class="brand-txt"><b>Noumabeu Moutacdie Jordan</b><span class="brand-sub">DevOps & Cloud · Développeur</span></span></a>
         <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
         <div class="nav-links" id="navlinks">
           <a href="#about">Profil</a>
@@ -300,6 +321,19 @@
       </section>
     </main>
 
+    <div class="modal" id="modal" hidden>
+      <div class="modal-overlay" data-close></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="m-title">
+        <button class="modal-x" data-close aria-label="Fermer le détail">&times;</button>
+        <div class="m-top"><span class="pcat" id="m-cat"></span><span class="m-domain" id="m-domain"></span></div>
+        <h3 id="m-title"></h3>
+        <p class="m-long" id="m-long"></p>
+        <div class="m-section"><h4>Points clés</h4><ul id="m-highlights"></ul></div>
+        <div class="m-section"><h4>Compétences & technologies liées</h4><div class="chips" id="m-skills"></div></div>
+        <div class="m-links" id="m-links"></div>
+      </div>
+    </div>
+
     <footer>
       <div class="wrap">
         <span class="mono">NM</span>
@@ -356,26 +390,116 @@
 
       const GH = "https://github.com/Moutacdie2000/";
       const PROJECTS = [
-        { cat: "cloud", feat: true, title: "AWS Landing Zone", desc: "Socle AWS multi-comptes (Landing Zone) : AWS Organizations, SCP, IAM Identity Center, logging centralisé (CloudTrail / Config) et GuardDuty, le tout en Terraform / Terragrunt.", tags: ["Terraform", "Terragrunt", "AWS Organizations", "GuardDuty", "SCP"], repo: "aws-landing-zone-terraform" },
-        { cat: "cloud", feat: true, title: "EKS Microservices GitOps", desc: "Microservices sur AWS EKS pilotés en GitOps avec Helm + ArgoCD (pattern app-of-apps), autoscaling HPA, scan d'images Trivy et CI GitHub Actions.", tags: ["AWS EKS", "Kubernetes", "Helm", "ArgoCD", "Trivy"], repo: "eks-microservices-gitops" },
-        { cat: "cloud", title: "AWS Web App 3-tiers HA", desc: "Application web 3-tiers haute disponibilité : VPC multi-AZ, ALB, ECS Fargate, RDS Multi-AZ et CloudFront. 100% Terraform avec CI/CD GitHub Actions.", tags: ["Terraform", "ECS Fargate", "RDS Multi-AZ", "ALB", "CloudFront"], repo: "aws-webapp-3tier-ha" },
-        { cat: "cloud", title: "Observabilité & DevSecOps", desc: "Stack d'observabilité (Prometheus, Grafana, Loki, Tempo, OpenTelemetry) couplée à un pipeline DevSecOps (tfsec, Checkov, Trivy, gitleaks, Semgrep). SLO et burn-rate.", tags: ["Prometheus", "Grafana", "Loki", "OpenTelemetry", "DevSecOps"], repo: "observability-devsecops" },
-        { cat: "cloud", title: "Serverless Event-Driven (CDK)", desc: "Backend serverless event-driven sur AWS en CDK : API Gateway, Lambda, DynamoDB, EventBridge, Step Functions, DLQ SQS et X-Ray. Pipeline de traitement d'images.", tags: ["AWS CDK", "Lambda", "EventBridge", "Step Functions", "DynamoDB"], repo: "serverless-event-driven-cdk" },
+        { cat: "cloud", feat: true, title: "AWS Landing Zone", domain: "Cloud & DevOps · Gouvernance multi-comptes (IaC)",
+          desc: "Socle d'entreprise multi-comptes : Organizations, SCP, IAM Identity Center, logging centralisé et GuardDuty, en Terraform / Terragrunt.",
+          long: "Un socle d'entreprise (Landing Zone) qui pose les fondations de gouvernance, de sécurité et de conformité avant tout déploiement applicatif sur AWS. L'ensemble est versionné en Terraform / Terragrunt pour rester reproductible et auditable.",
+          highlights: ["Structure multi-comptes via AWS Organizations et unités d'organisation (OU)", "Garde-fous de sécurité avec les Service Control Policies (SCP)", "Authentification centralisée via IAM Identity Center (SSO)", "Traçabilité : CloudTrail et AWS Config centralisés, détection de menaces GuardDuty", "Industrialisation Terragrunt (DRY, multi-environnements)"],
+          skills: ["Terraform", "Terragrunt", "AWS Organizations", "SCP", "IAM Identity Center (SSO)", "CloudTrail", "AWS Config", "GuardDuty", "Infrastructure as Code", "Gouvernance cloud", "Sécurité AWS"],
+          tags: ["Terraform", "Terragrunt", "AWS Organizations", "GuardDuty"], repo: "aws-landing-zone-terraform" },
+        { cat: "cloud", feat: true, title: "EKS Microservices GitOps", domain: "Cloud & DevOps · Kubernetes / GitOps",
+          desc: "Microservices sur AWS EKS pilotés en GitOps (Helm + ArgoCD, app-of-apps), autoscaling HPA et scan d'images Trivy.",
+          long: "Une plateforme de microservices sur Kubernetes (AWS EKS) entièrement pilotée par GitOps : l'état du cluster est décrit dans Git et réconcilié automatiquement par ArgoCD (pattern app-of-apps). Les déploiements sont packagés en Helm, scalés par HPA et sécurisés par scan d'images.",
+          highlights: ["Cluster AWS EKS provisionné en IaC", "Déploiement déclaratif via ArgoCD (GitOps, app-of-apps)", "Packaging applicatif avec des Helm charts", "Autoscaling horizontal (HPA) selon la charge", "Sécurité supply-chain : scan d'images Trivy en CI", "CI GitHub Actions"],
+          skills: ["AWS EKS", "Kubernetes", "Helm", "ArgoCD", "GitOps", "HPA / Autoscaling", "Trivy", "GitHub Actions", "Microservices", "Docker"],
+          tags: ["AWS EKS", "Kubernetes", "Helm", "ArgoCD"], repo: "eks-microservices-gitops" },
+        { cat: "cloud", title: "AWS Web App 3-tiers HA", domain: "Cloud & DevOps · Architecture haute disponibilité",
+          desc: "Architecture web 3-tiers haute disponibilité (VPC multi-AZ, ALB, ECS Fargate, RDS Multi-AZ, CloudFront), 100% Terraform.",
+          long: "Une architecture web 3-tiers conçue pour la haute disponibilité et la résilience multi-AZ sur AWS, déployée à 100% en Terraform avec un pipeline CI/CD. Pensée pour absorber la panne d'une zone de disponibilité sans interruption de service.",
+          highlights: ["Réseau VPC multi-AZ (sous-réseaux publics et privés)", "Répartition de charge via Application Load Balancer", "Conteneurs applicatifs sur ECS Fargate (sans serveurs à gérer)", "Base de données RDS Multi-AZ avec bascule automatique", "Diffusion via CloudFront (CDN)", "Tout en Terraform avec CI/CD GitHub Actions"],
+          skills: ["Terraform", "AWS VPC", "ALB", "ECS Fargate", "RDS Multi-AZ", "CloudFront", "Haute disponibilité", "CI/CD", "GitHub Actions"],
+          tags: ["Terraform", "ECS Fargate", "RDS Multi-AZ", "CloudFront"], repo: "aws-webapp-3tier-ha" },
+        { cat: "cloud", title: "Observabilité & DevSecOps", domain: "Observabilité & SRE · DevSecOps",
+          desc: "Stack d'observabilité (Prometheus, Grafana, Loki, Tempo, OTel) + pipeline DevSecOps (tfsec, Checkov, Trivy, gitleaks, Semgrep).",
+          long: "Une stack d'observabilité complète (métriques, logs, traces) couplée à une chaîne DevSecOps qui intègre la sécurité tout au long du pipeline. Le tout orienté SLO / SLI pour piloter la fiabilité par les objectifs de service.",
+          highlights: ["Métriques Prometheus et dashboards Grafana", "Logs centralisés Loki, traces distribuées Tempo / OpenTelemetry", "Définition de SLO et alerting sur le burn-rate", "Sécurité shift-left : tfsec et Checkov (IaC), Trivy (images), gitleaks (secrets), Semgrep (SAST)"],
+          skills: ["Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry", "SLO / SLI", "tfsec", "Checkov", "Trivy", "gitleaks", "Semgrep", "DevSecOps", "SRE"],
+          tags: ["Prometheus", "Grafana", "Loki", "DevSecOps"], repo: "observability-devsecops" },
+        { cat: "cloud", title: "Serverless Event-Driven (CDK)", domain: "Cloud & DevOps · Serverless / Event-driven",
+          desc: "Backend serverless événementiel en AWS CDK : API Gateway, Lambda, DynamoDB, EventBridge, Step Functions, DLQ SQS, X-Ray.",
+          long: "Un backend serverless et événementiel sur AWS, décrit en CDK (TypeScript). L'architecture découple les traitements via des événements et garantit la résilience (retries, files de lettres mortes) et la traçabilité de bout en bout.",
+          highlights: ["API Gateway et Lambda (calcul à la demande)", "Orchestration via Step Functions, événements EventBridge", "Persistance DynamoDB", "Résilience : files de lettres mortes (DLQ SQS) et retries", "Traçabilité distribuée X-Ray", "Infrastructure en AWS CDK (TypeScript)"],
+          skills: ["AWS CDK", "Lambda", "API Gateway", "EventBridge", "Step Functions", "DynamoDB", "SQS (DLQ)", "X-Ray", "Serverless", "TypeScript"],
+          tags: ["AWS CDK", "Lambda", "EventBridge", "Step Functions"], repo: "serverless-event-driven-cdk" },
 
-        { cat: "backend", feat: true, title: "BuildPilot · SaaS BTP", desc: "Plateforme SaaS multi-entreprises de gestion de chantiers : NestJS, Prisma, PostgreSQL, Next.js. JWT access/refresh, RBAC 6 rôles, temps réel Socket.IO, fichiers S3, paiement Mobile Money et CI/CD.", tags: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "RBAC", "Socket.IO"], repo: "buildpilot" },
-        { cat: "backend", feat: true, title: "BoxOffice · API .NET 8", desc: "API de billetterie garantissant l'absence de survente sous forte concurrence : EF Core (concurrence optimiste), SignalR, JWT et 17 tests xUnit dont un test de charge parallèle.", tags: [".NET 8", "EF Core", "SignalR", "xUnit", "PostgreSQL"], repo: "boxoffice-ticketing" },
-        { cat: "backend", feat: true, title: "Bazar · Marketplace Django", desc: "Marketplace de services en Django : API DRF, tâches asynchrones Celery, chat temps réel via Channels, paiements Stripe Connect et recherche plein-texte PostgreSQL. Tests pytest.", tags: ["Django", "DRF", "Celery", "Channels", "Stripe"], repo: "bazar-marketplace" },
-        { cat: "backend", title: "Pulse · SaaS Monitoring", desc: "SaaS multi-tenant de monitoring d'uptime et pages de statut : Next.js 14, Prisma, Auth.js v5 et Stripe. RBAC, incidents, ISR et 56 tests.", tags: ["Next.js", "Prisma", "Auth.js", "Stripe", "Multi-tenant"], repo: "pulse-monitoring" },
-        { cat: "backend", title: "Odoo 18 · Gestion hospitalière", desc: "Module métier Odoo 18 : gestion des patients, consultations et hospitalisations, avec dépendances tierces. Modèles Python / ORM et vues XML.", tags: ["Odoo 18", "Python", "ORM", "XML"], repo: "addons" },
-        { cat: "backend", title: "Odoo 15 · Services AWS", desc: "Module Odoo 15 ajoutant au site web une section dynamique de services AWS gérés directement depuis le back-office.", tags: ["Odoo 15", "Python", "AWS"], repo: "taf-odoo15" },
-        { cat: "backend", title: "Asso-Stock", desc: "Application web de gestion de stock pour associations : produits, catégories, dons et transactions. Next.js, Prisma et Clerk.", tags: ["Next.js", "Prisma", "Clerk"], repo: "asso-stock" },
+        { cat: "backend", feat: true, title: "BuildPilot · SaaS BTP", domain: "SaaS · BTP / Gestion de chantiers",
+          desc: "Plateforme SaaS multi-tenant de gestion de chantiers : NestJS, Prisma, Next.js, RBAC 6 rôles, temps réel, paiement Mobile Money.",
+          long: "Une plateforme SaaS multi-entreprises qui digitalise la gestion de chantiers du BTP, du devis au pointage. Architecture multi-tenant avec contrôle d'accès fin, temps réel et paiement mobile, pensée pour la production.",
+          highlights: ["Multi-tenant : isolation des données par entreprise", "Authentification JWT access/refresh, RBAC à 6 rôles", "Temps réel via Socket.IO (notifications, messagerie)", "Stockage de fichiers sur Amazon S3 avec repli local", "Paiement Mobile Money (Campay) avec webhook signé", "Journal de chantier, budget, devis / factures PDF, stocks"],
+          skills: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "JWT", "RBAC", "Socket.IO", "Amazon S3", "Mobile Money / Campay", "Docker", "CI/CD", "Multi-tenant"],
+          tags: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "RBAC"], repo: "buildpilot" },
+        { cat: "backend", feat: true, title: "BoxOffice · API .NET 8", domain: "Billetterie · Concurrence & cohérence des données",
+          desc: "API de billetterie garantissant zéro survente sous forte concurrence : EF Core (concurrence optimiste), SignalR, tests de charge xUnit.",
+          long: "Une API de billetterie dont l'enjeu central est de garantir l'absence de survente quand des milliers d'acheteurs réservent les mêmes places simultanément. Le projet démontre la maîtrise de la concurrence, des transactions et des tests de charge.",
+          highlights: ["Concurrence optimiste via EF Core (row versioning)", "Garantie zéro survente sous forte charge", "Notifications temps réel via SignalR", "Sécurité par JWT", "17 tests xUnit dont un test de charge parallèle", "Conteneurisé (Docker et PostgreSQL)"],
+          skills: [".NET 8", "C#", "ASP.NET Core", "EF Core", "Concurrence optimiste", "SignalR", "JWT", "xUnit", "Tests de charge", "PostgreSQL", "Docker"],
+          tags: [".NET 8", "EF Core", "SignalR", "xUnit"], repo: "boxoffice-ticketing" },
+        { cat: "backend", feat: true, title: "Bazar · Marketplace Django", domain: "Marketplace · E-commerce",
+          desc: "Marketplace de services en Django : API DRF, Celery, chat temps réel (Channels), Stripe Connect, recherche FTS PostgreSQL.",
+          long: "Une marketplace de services complète en Django, couvrant l'API métier, les paiements répartis entre vendeurs, la communication temps réel et une recherche performante. Architecture découplée avec traitements asynchrones.",
+          highlights: ["API REST avec Django REST Framework", "Paiements multi-vendeurs via Stripe Connect", "Chat temps réel via Channels (WebSockets)", "Tâches asynchrones avec Celery (workers)", "Recherche plein-texte PostgreSQL (FTS)", "Conteneurisé, tests pytest"],
+          skills: ["Python", "Django", "Django REST Framework", "Celery", "Channels / WebSockets", "Stripe Connect", "PostgreSQL FTS", "Redis", "Docker", "pytest"],
+          tags: ["Django", "DRF", "Celery", "Stripe"], repo: "bazar-marketplace" },
+        { cat: "backend", title: "Pulse · SaaS Monitoring", domain: "SaaS · Monitoring / Observabilité",
+          desc: "SaaS multi-tenant de monitoring d'uptime et pages de statut : Next.js 14, Prisma, Auth.js v5, Stripe, 56 tests.",
+          long: "Un SaaS multi-tenant de surveillance de disponibilité (uptime) avec pages de statut publiques, abonnements et gestion d'incidents. Conçu autour d'une expérience moderne (Next.js) et d'une couverture de tests solide.",
+          highlights: ["Architecture multi-tenant avec RBAC", "Monitoring d'uptime et pages de statut publiques", "Gestion d'incidents", "Abonnements et facturation Stripe", "Rendu incrémental (ISR)", "56 tests"],
+          skills: ["Next.js 14", "Prisma", "Auth.js v5", "Stripe", "RBAC", "Multi-tenant", "ISR", "TypeScript", "PostgreSQL"],
+          tags: ["Next.js", "Prisma", "Auth.js", "Stripe"], repo: "pulse-monitoring" },
+        { cat: "backend", title: "Odoo 18 · Gestion hospitalière", domain: "ERP · Santé",
+          desc: "Module métier Odoo 18 : patients, consultations et hospitalisations. Modèles Python / ORM et vues XML.",
+          long: "Un module métier Odoo 18 pour la gestion hospitalière : suivi des patients, des consultations et des hospitalisations, intégré au socle Odoo via son ORM et ses vues. Développement Python orienté métier.",
+          highlights: ["Modèles métier (patients, consultations, hospitalisations)", "Développement Python sur l'ORM Odoo", "Vues XML et logique métier", "Gestion des dépendances tierces"],
+          skills: ["Odoo 18", "Python", "ORM Odoo", "XML", "Modules métier", "PostgreSQL"],
+          tags: ["Odoo 18", "Python", "ORM", "XML"], repo: "addons" },
+        { cat: "backend", title: "Odoo 15 · Services AWS", domain: "ERP · Intégration Cloud",
+          desc: "Module Odoo 15 ajoutant au site web une section dynamique de services AWS gérée depuis le back-office.",
+          long: "Un module Odoo 15 qui enrichit le site web d'une section dynamique présentant des services AWS, administrable directement depuis le back-office Odoo. Un pont entre l'ERP et un catalogue cloud.",
+          highlights: ["Section web dynamique pilotée depuis le back-office", "Présentation de services AWS managés", "Développement de module Odoo (Python / XML)"],
+          skills: ["Odoo 15", "Python", "XML", "AWS", "Développement de modules", "Web Odoo"],
+          tags: ["Odoo 15", "Python", "AWS"], repo: "taf-odoo15" },
+        { cat: "backend", title: "Asso-Stock", domain: "Gestion de stock · Secteur associatif",
+          desc: "Application web de gestion de stock pour associations : produits, catégories, dons, transactions. Next.js, Prisma, Clerk.",
+          long: "Une application web de gestion de stock pensée pour les associations : suivi des produits, des catégories, des dons et des transactions, avec authentification gérée. Interface moderne Next.js et persistance via Prisma.",
+          highlights: ["Gestion des produits, catégories, dons et transactions", "Authentification via Clerk", "Persistance via l'ORM Prisma", "Interface Next.js"],
+          skills: ["Next.js", "Prisma", "Clerk", "TypeScript", "PostgreSQL", "CRUD / Gestion"],
+          tags: ["Next.js", "Prisma", "Clerk"], repo: "asso-stock" },
 
-        { cat: "web", feat: true, title: "Trading Sim", desc: "Simulateur de carnet d'ordres temps réel : moteur C++17 (ordres synthétiques Poisson, matching limit-price-time-priority), gateway Node.js / TS en WebSocket, interface React et client Qt 6. P&L mark-to-market en direct.", tags: ["C++17", "Node.js", "WebSocket", "React", "Qt 6"], repo: "trading-sim" },
-        { cat: "web", title: "GRID · Mission Control", desc: "Tableau de bord d'observabilité temps réel (mission control) : full-stack React / Vite / TypeScript et Node Fastify / SSE, avec un design salle de contrôle sur mesure.", tags: ["React", "Fastify", "SSE", "TypeScript"], repo: "grid-mission-control" },
-        { cat: "web", title: "ROOMS · Draw & Guess", desc: "Jeu multijoueur temps réel draw & guess (Pictionary) : WebSocket (Node ws) et React / Vite / TS, serveur autoritaire et bots. Design néo-brutaliste.", tags: ["WebSocket", "React", "Node ws", "Multijoueur"], repo: "rooms-draw-guess" },
-        { cat: "web", feat: true, title: "ORBIT · Data-story", desc: "Data-story en scrollytelling sur l'histoire des lancements orbitaux : Astro + React + D3, pipeline de données et design éditorial.", tags: ["Astro", "React", "D3", "Scrollytelling"], repo: "orbit-data-story", demo: "https://moutacdie2000.github.io/orbit-data-story/" },
-        { cat: "web", title: "Sudoku", desc: "Sudoku web jouable : générateur à solution unique, solveur par backtracking, validation en direct, notes et indices. TypeScript + Vite, design papier éditorial.", tags: ["TypeScript", "Vite", "Algorithmes"], repo: "sudoku", demo: "https://moutacdie2000.github.io/sudoku/" },
-        { cat: "web", title: "AzerType & fronts natifs", desc: "Recueil de projets front-end en JavaScript natif : jeu de frappe AzerType, site vitrine et portfolio photo. HTML, CSS et JavaScript vanilla.", tags: ["HTML", "CSS", "JavaScript"], repo: "projetgit", demo: "https://moutacdie2000.github.io/projetgit/" },
+        { cat: "web", feat: true, title: "Trading Sim", domain: "FinTech · Trading temps réel (carnet d'ordres)",
+          desc: "Simulateur de carnet d'ordres : moteur C++17 (matching limit-price-time), gateway Node WebSocket, UI React et client Qt 6.",
+          long: "Un simulateur de marché de bout en bout : un moteur C++ génère et apparie des ordres selon la priorité prix-temps, un gateway Node diffuse le flux en WebSocket, et une interface (React ou Qt) permet de trader et de suivre le P&L en direct. Un projet polyglotte qui touche au calcul performant et au temps réel.",
+          highlights: ["Moteur d'appariement C++17 (priorité limit-price-time)", "Génération d'ordres synthétiques (processus de Poisson)", "Gateway Node.js / TypeScript diffusant en WebSocket", "Interface web React et client desktop Qt 6", "Suivi du P&L mark-to-market en direct"],
+          skills: ["C++17", "Node.js", "TypeScript", "WebSocket", "React", "Qt 6", "Systèmes temps réel", "Algorithmique", "Finance de marché"],
+          tags: ["C++17", "Node.js", "WebSocket", "React", "Qt 6"], repo: "trading-sim" },
+        { cat: "web", title: "GRID · Mission Control", domain: "Observabilité · Tableau de bord temps réel",
+          desc: "Dashboard d'observabilité type salle de contrôle : flux temps réel via SSE, back-end Node Fastify, front React / Vite.",
+          long: "Un tableau de bord d'observabilité de type salle de contrôle qui affiche des flux de données en direct. Full-stack avec un back-end Node poussant les mises à jour en Server-Sent Events et une interface au design sur mesure.",
+          highlights: ["Flux temps réel via Server-Sent Events (SSE)", "Back-end Node Fastify", "Front React / Vite / TypeScript", "Design mission control sur mesure"],
+          skills: ["React", "Vite", "TypeScript", "Node.js", "Fastify", "SSE", "Temps réel", "Dataviz"],
+          tags: ["React", "Fastify", "SSE", "TypeScript"], repo: "grid-mission-control" },
+        { cat: "web", title: "ROOMS · Draw & Guess", domain: "Jeu multijoueur · Temps réel",
+          desc: "Jeu multijoueur de dessin et devinette (Pictionary) : serveur autoritaire WebSocket (Node ws), bots, front React.",
+          long: "Un jeu multijoueur de dessin et devinette (type Pictionary) avec un serveur autoritaire qui fait foi sur l'état de la partie, une communication WebSocket et des bots. Gestion fine du temps réel et de la synchronisation des joueurs.",
+          highlights: ["Serveur de jeu autoritaire (Node ws)", "Communication WebSocket bidirectionnelle", "Bots pour compléter les parties", "Front React / Vite / TypeScript", "Design néo-brutaliste"],
+          skills: ["WebSocket", "Node.js (ws)", "React", "Vite", "TypeScript", "Temps réel", "Synchronisation d'état", "Game dev"],
+          tags: ["WebSocket", "Node ws", "React", "Multijoueur"], repo: "rooms-draw-guess" },
+        { cat: "web", feat: true, title: "ORBIT · Data-story", domain: "Data-storytelling · Spatial",
+          desc: "Data-story en scrollytelling sur les lancements orbitaux : Astro (SSG) + îlots React + visualisations D3. Démo en ligne.",
+          long: "Une data-story interactive en scrollytelling qui raconte l'histoire des lancements orbitaux. Construite en Astro pour la performance (rendu statique) avec des îlots React hydratés et des visualisations D3 animées au défilement.",
+          highlights: ["Scrollytelling : narration pilotée par le défilement", "Rendu statique Astro (perf et SEO) et îlots React", "Visualisations de données D3", "Pipeline de préparation des données", "Design éditorial soigné", "Déployée en ligne (démo)"],
+          skills: ["Astro", "React", "D3.js", "Scrollytelling", "Dataviz", "TypeScript", "SSG", "Design éditorial"],
+          tags: ["Astro", "React", "D3", "Scrollytelling"], repo: "orbit-data-story", demo: "https://moutacdie2000.github.io/orbit-data-story/" },
+        { cat: "web", title: "Sudoku", domain: "Jeu · Algorithmique",
+          desc: "Sudoku web jouable : générateur à solution unique, solveur par backtracking, validation en direct. TypeScript + Vite. Démo en ligne.",
+          long: "Un Sudoku web jouable et complet, avec un générateur garantissant une solution unique et un solveur par backtracking. La logique est pure et testable, et l'expérience de jeu est soignée (notes, indices, validation en direct).",
+          highlights: ["Générateur de grilles à solution unique", "Solveur par backtracking", "Validation des conflits en direct, notes et indices", "Logique pure et testée", "TypeScript + Vite, design papier éditorial", "Déployé en ligne (démo)"],
+          skills: ["TypeScript", "Vite", "Algorithmique (backtracking)", "Tests unitaires", "UI / UX", "Logique de jeu"],
+          tags: ["TypeScript", "Vite", "Algorithmes"], repo: "sudoku", demo: "https://moutacdie2000.github.io/sudoku/" },
+        { cat: "web", title: "AzerType & fronts natifs", domain: "Web front-end · Fondamentaux",
+          desc: "Recueil de fronts en JavaScript natif : jeu de frappe AzerType, site vitrine, portfolio photo. Démo en ligne.",
+          long: "Un recueil de projets front-end réalisés en JavaScript natif (sans framework), dont AzerType, un jeu d'entraînement à la frappe rapide, un site vitrine et un portfolio photo. Démontre la maîtrise des fondamentaux du web.",
+          highlights: ["Jeu de frappe AzerType (mots ou phrases, score)", "Site vitrine et portfolio photo", "HTML, CSS et JavaScript vanilla (sans framework)", "Déployé en ligne (démo)"],
+          skills: ["HTML", "CSS", "JavaScript (vanilla)", "DOM", "Fondamentaux web"],
+          tags: ["HTML", "CSS", "JavaScript"], repo: "projetgit", demo: "https://moutacdie2000.github.io/projetgit/" },
       ];
 
       const CATS = { all: "Tous", cloud: "Cloud & DevOps", backend: "Backend & APIs", web: "Web & temps réel" };
@@ -401,19 +525,23 @@
       const codeIco = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 3.9-1.4 6.8-5.2 6.8-9.7C22 6.6 17.5 2 12 2z"/></svg>';
       const demoIco = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.6l-9.3 9.3 1.4 1.4L19 6.4V10h2V3h-7zM5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z"/></svg>';
       const grid = document.getElementById("projects-grid");
+      const arrowIco = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5l8 7-8 7z"/></svg>';
+      function projectCard(p) {
+        const c = el("div", "pcard reveal in");
+        c.style.setProperty("--cat", CATCOLOR[p.cat]);
+        c.tabIndex = 0; c.setAttribute("role", "button"); c.setAttribute("aria-label", "Voir le détail du projet " + p.title);
+        const feat = p.feat ? `<span class="pfeat">★ Mis en avant</span>` : "";
+        c.innerHTML = `<div class="ptop"><span class="pcat">${CATS[p.cat]}</span>${feat}</div>
+          <h3>${p.title}</h3><p class="pdesc">${p.desc}</p>
+          <div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join("")}</div>
+          <div class="phint">Voir le détail ${arrowIco}</div>`;
+        c.onclick = () => openProject(p);
+        c.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProject(p); } };
+        return c;
+      }
       function renderProjects(filter) {
         grid.innerHTML = "";
-        PROJECTS.filter(p => filter === "all" || p.cat === filter).forEach(p => {
-          const card = el("div", "pcard reveal in");
-          card.style.setProperty("--cat", CATCOLOR[p.cat]);
-          const demo = p.demo ? `<a class="plink demo" href="${p.demo}" target="_blank" rel="noopener">${demoIco}Démo</a>` : "";
-          const feat = p.feat ? `<span class="pfeat">★ Mis en avant</span>` : "";
-          card.innerHTML = `<div class="ptop"><span class="pcat">${CATS[p.cat]}</span>${feat}</div>
-            <h3>${p.title}</h3><p class="pdesc">${p.desc}</p>
-            <div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join("")}</div>
-            <div class="plinks"><a class="plink code" href="${GH + p.repo}" target="_blank" rel="noopener">${codeIco}Code</a>${demo}</div>`;
-          grid.appendChild(card);
-        });
+        PROJECTS.filter(p => filter === "all" || p.cat === filter).forEach(p => grid.appendChild(projectCard(p)));
       }
       const filters = document.getElementById("filters");
       Object.entries(CATS).forEach(([k, label], i) => {
@@ -422,6 +550,26 @@
         filters.appendChild(b);
       });
       renderProjects("all");
+
+      // ----- Modale de détail projet -----
+      const modal = document.getElementById("modal");
+      function openProject(p) {
+        modal.style.setProperty("--cat", CATCOLOR[p.cat]);
+        document.getElementById("m-cat").textContent = CATS[p.cat];
+        document.getElementById("m-domain").textContent = p.domain || "";
+        document.getElementById("m-title").textContent = p.title;
+        document.getElementById("m-long").textContent = p.long || p.desc;
+        document.getElementById("m-highlights").innerHTML = (p.highlights || []).map(h => `<li>${h}</li>`).join("");
+        document.getElementById("m-skills").innerHTML = (p.skills || p.tags).map(s => `<span class="chip">${s}</span>`).join("");
+        const demo = p.demo ? `<a class="plink demo" href="${p.demo}" target="_blank" rel="noopener">${demoIco}Voir la démo</a>` : "";
+        document.getElementById("m-links").innerHTML = `<a class="plink code" href="${GH + p.repo}" target="_blank" rel="noopener">${codeIco}Code source</a>${demo}`;
+        modal.hidden = false; document.body.classList.add("modal-open");
+        modal.querySelector(".modal-card").scrollTop = 0;
+        modal.querySelector(".modal-x").focus();
+      }
+      function closeModal() { modal.hidden = true; document.body.classList.remove("modal-open"); }
+      modal.querySelectorAll("[data-close]").forEach(x => x.onclick = closeModal);
+      addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
 
       // ----- Interactions -----
       document.getElementById("year").textContent = new Date().getFullYear();
