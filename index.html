@@ -132,9 +132,9 @@
       .filter.active { background: var(--navy); color: #fff; border-color: var(--navy); }
       .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 22px; }
       .pcard { background: var(--card); border: 1px solid var(--line); border-radius: 17px; padding: 0; box-shadow: var(--shadow); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s; }
-      .pthumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; display: block; background: #0f2a43; border-bottom: 1px solid var(--line); }
+      .pthumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; display: block; background: linear-gradient(135deg, #16395a, #0f2a43); border-bottom: 1px solid var(--line); }
       .pbody { padding: 20px; display: flex; flex-direction: column; flex: 1; }
-      .m-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; border-radius: 14px; background: #0f2a43; margin-bottom: 18px; }
+      .m-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; border-radius: 14px; background: linear-gradient(135deg, #16395a, #0f2a43); margin-bottom: 18px; }
       .pcard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--cat, var(--teal)); }
       .pcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
       .pcard .ptop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 10px; }
