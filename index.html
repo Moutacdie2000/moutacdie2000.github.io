@@ -27,11 +27,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --navy: #0f2a43; --navy-2: #0b2236; --ink: #1f2a36; --muted: #5c6b7a;
+        --navy: #0f2a43; --navy-2: #0b2236; --ink: #172230; --muted: #4a5a6a;
         --teal: #0e7c86; --teal-2: #11a0ad; --blue: #3b82f6; --violet: #8b7cf0;
         --bg: #f5f8fa; --card: #ffffff; --line: #e6edf2; --soft: #eef5f6;
         --sans: 'Source Sans 3', system-ui, -apple-system, sans-serif;
         --head: 'Sora', var(--sans);
+        --heading: #0f2a43; --ink-2: #33414e; --nav-bg: rgba(245, 248, 250, 0.82);
         --shadow: 0 10px 30px rgba(15, 42, 67, 0.08);
         --shadow-lg: 0 20px 50px rgba(15, 42, 67, 0.16);
       }
@@ -41,27 +42,27 @@
       a { color: inherit; text-decoration: none; }
       img { max-width: 100%; display: block; }
       .wrap { width: min(1120px, 92vw); margin: 0 auto; }
-      h1, h2, h3, h4 { font-family: var(--head); color: var(--navy); line-height: 1.15; letter-spacing: -0.01em; }
+      h1, h2, h3, h4 { font-family: var(--head); color: var(--heading); line-height: 1.15; letter-spacing: -0.01em; }
       section { padding: 84px 0; }
       .eyebrow { font-family: var(--head); font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); }
       .sec-title { font-size: clamp(26px, 4vw, 38px); font-weight: 800; margin: 8px 0 10px; }
       .sec-intro { color: var(--muted); max-width: 640px; margin-bottom: 36px; }
 
       /* NAV */
-      nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(245, 248, 250, 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s, box-shadow .3s; }
+      nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: var(--nav-bg); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s, box-shadow .3s; }
       nav.scrolled { border-color: var(--line); box-shadow: 0 6px 20px rgba(15,42,67,.05); }
       .nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-      .brand { display: flex; align-items: center; gap: 11px; font-family: var(--head); font-weight: 700; color: var(--navy); }
+      .brand { display: flex; align-items: center; gap: 11px; font-family: var(--head); font-weight: 700; color: var(--heading); }
       .mono { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-weight: 800; font-size: 16px; color: #061018; background: linear-gradient(135deg, var(--teal-2), var(--teal)); }
-      .brand-txt b { font-weight: 700; font-size: 15.5px; color: var(--navy); white-space: nowrap; }
+      .brand-txt b { font-weight: 700; font-size: 15.5px; color: var(--heading); white-space: nowrap; }
       .brand-sub { display: block; font-family: var(--sans); font-weight: 600; font-size: 11.5px; color: var(--muted); letter-spacing: .02em; }
       .nav-links { display: flex; align-items: center; gap: 26px; }
-      .nav-links a { font-weight: 600; font-size: 15px; color: #3a4754; transition: color .2s; }
+      .nav-links a { font-weight: 600; font-size: 15px; color: var(--ink-2); transition: color .2s; }
       .nav-links a:hover { color: var(--teal); }
       .nav-cta { background: var(--navy); color: #fff !important; padding: 9px 16px; border-radius: 10px; font-size: 14px; transition: transform .2s, background .2s; }
       .nav-cta:hover { background: var(--teal); transform: translateY(-1px); }
       .burger { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
-      .burger span { display: block; width: 24px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; transition: .3s; }
+      .burger span { display: block; width: 24px; height: 2px; background: var(--heading); margin: 5px 0; border-radius: 2px; transition: .3s; }
 
       /* HERO */
       .hero { position: relative; padding: 150px 0 96px; color: #eaf2f6; overflow: hidden;
@@ -91,20 +92,20 @@
       .photo-wrap { justify-self: center; position: relative; }
       .photo-ring { width: 270px; height: 270px; border-radius: 50%; padding: 6px; background: conic-gradient(from 140deg, var(--teal-2), #5fd3dd, var(--teal), var(--teal-2)); box-shadow: var(--shadow-lg); }
       .photo-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 5px solid #0f2a43; }
-      .badge-aws { position: absolute; bottom: 8px; right: -6px; background: #fff; color: var(--navy); border-radius: 13px; padding: 9px 13px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 9px; }
+      .badge-aws { position: absolute; bottom: 8px; right: -6px; background: var(--card); color: var(--heading); border-radius: 13px; padding: 9px 13px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 9px; }
       .badge-aws .ico { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg,#ff9900,#ec7211); color:#fff; display:grid; place-items:center; font-weight:800; font-size:13px; font-family:var(--head); }
       .badge-aws b { font-family: var(--head); font-size: 12.5px; display: block; line-height: 1.2; }
       .badge-aws span { font-size: 10.5px; color: var(--muted); }
 
       /* ABOUT */
       .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 44px; align-items: start; }
-      .about-grid p { color: #41505d; margin-bottom: 14px; font-size: 16.5px; }
-      .about-grid p b { color: var(--navy); }
+      .about-grid p { color: var(--ink-2); margin-bottom: 14px; font-size: 16.5px; }
+      .about-grid p b { color: var(--heading); }
       .quickfacts { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow); }
       .quickfacts li { list-style: none; display: flex; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
       .quickfacts li:last-child { border-bottom: 0; }
       .quickfacts .k { font-family: var(--head); font-weight: 700; font-size: 13px; color: var(--teal); min-width: 96px; }
-      .quickfacts .v { color: #3a4754; font-size: 14.5px; }
+      .quickfacts .v { color: var(--ink-2); font-size: 14.5px; }
 
       /* SKILLS */
       .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
@@ -113,7 +114,7 @@
       .skill-card h3 { font-size: 15.5px; display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
       .skill-card h3 .bar { width: 22px; height: 4px; border-radius: 3px; background: linear-gradient(90deg, var(--teal-2), var(--teal)); }
       .chips { display: flex; flex-wrap: wrap; gap: 7px; }
-      .chip { background: var(--soft); color: #2c5a60; border: 1px solid #d9e6e8; border-radius: 8px; padding: 4px 10px; font-size: 12.5px; font-weight: 600; }
+      .chip { background: var(--soft); color: var(--teal); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; font-size: 12.5px; font-weight: 600; }
 
       /* TECH GRID */
       .tech-block { margin-bottom: 22px; }
@@ -122,19 +123,19 @@
       .tech { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 96px; height: 92px; padding: 10px 6px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s, border-color .2s; }
       .tech:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--teal); }
       .tech img { width: 38px; height: 38px; object-fit: contain; }
-      .tech span { font-family: var(--head); font-weight: 600; font-size: 12px; color: #3a4754; text-align: center; line-height: 1.15; }
+      .tech span { font-family: var(--head); font-weight: 600; font-size: 12px; color: var(--ink-2); text-align: center; line-height: 1.15; }
 
       /* EXPERIENCE */
       .timeline { position: relative; margin-left: 6px; }
       .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--teal-2), var(--line)); }
       .tl-item { position: relative; padding: 0 0 28px 38px; }
       .tl-item:last-child { padding-bottom: 0; }
-      .tl-item::before { content: ""; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid var(--teal); box-shadow: 0 0 0 4px rgba(17,160,173,.12); }
+      .tl-item::before { content: ""; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--card); border: 3px solid var(--teal); box-shadow: 0 0 0 4px rgba(17,160,173,.12); }
       .tl-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 14px; align-items: baseline; }
-      .tl-role { font-family: var(--head); font-weight: 700; font-size: 17px; color: var(--navy); }
+      .tl-role { font-family: var(--head); font-weight: 700; font-size: 17px; color: var(--heading); }
       .tl-co { color: var(--teal); font-weight: 600; }
       .tl-date { font-size: 13px; color: var(--muted); font-weight: 600; }
-      .tl-item ul { margin: 8px 0 0 18px; color: #41505d; }
+      .tl-item ul { margin: 8px 0 0 18px; color: var(--ink-2); }
       .tl-item li { margin: 3px 0; }
 
       /* PROJECTS */
@@ -142,12 +143,12 @@
       .fgroup { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
       .flabel { font-family: var(--head); font-weight: 700; font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); min-width: 168px; }
       .fchips { display: flex; flex-wrap: wrap; gap: 9px; }
-      .fselect { font-family: var(--head); font-weight: 600; font-size: 14px; padding: 9px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: #3a4754; cursor: pointer; min-width: 240px; }
+      .fselect { font-family: var(--head); font-weight: 600; font-size: 14px; padding: 9px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink-2); cursor: pointer; min-width: 240px; }
       .fselect:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(17,160,173,.15); }
       .filter-count { color: var(--muted); font-size: 14px; margin-bottom: 26px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
       .freset { font-family: var(--head); font-weight: 600; font-size: 13px; padding: 5px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--teal); cursor: pointer; transition: border-color .2s; }
       .freset:hover { border-color: var(--teal); }
-      .filter { font-family: var(--head); font-weight: 600; font-size: 14px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: #3a4754; cursor: pointer; transition: all .2s; }
+      .filter { font-family: var(--head); font-weight: 600; font-size: 14px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink-2); cursor: pointer; transition: all .2s; }
       .filter:hover { border-color: var(--teal); color: var(--teal); }
       .filter.active { background: var(--navy); color: #fff; border-color: var(--navy); }
       .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 22px; }
@@ -168,9 +169,9 @@
       .pcat { font-family: var(--head); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--cat, var(--teal)); background: color-mix(in srgb, var(--cat, var(--teal)) 12%, transparent); padding: 4px 10px; border-radius: 7px; }
       .pfeat { font-size: 11px; font-weight: 700; color: #b7791f; display: inline-flex; align-items: center; gap: 4px; }
       .pcard h3 { font-size: 18px; margin-bottom: 7px; }
-      .pcard .pdesc { color: #46535f; font-size: 14.3px; flex: 1; margin-bottom: 13px; }
+      .pcard .pdesc { color: var(--ink-2); font-size: 14.3px; flex: 1; margin-bottom: 13px; }
       .pcard .ptags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
-      .ptag { font-size: 11.5px; font-weight: 600; color: #51626e; background: var(--soft); border: 1px solid #e0e9ec; border-radius: 6px; padding: 3px 8px; }
+      .ptag { font-size: 11.5px; font-weight: 600; color: var(--muted); background: var(--soft); border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; }
       .pcard .plinks { display: flex; gap: 10px; margin-top: auto; }
       .plink { display: inline-flex; align-items: center; gap: 6px; font-family: var(--head); font-weight: 600; font-size: 13px; padding: 8px 13px; border-radius: 9px; transition: all .2s; }
       .plink svg { width: 15px; height: 15px; }
@@ -187,15 +188,15 @@
       .modal { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 18px; }
       .modal[hidden] { display: none; }
       .modal-overlay { position: absolute; inset: 0; background: rgba(8, 20, 32, .62); backdrop-filter: blur(4px); animation: mfade .2s ease; }
-      .modal-card { position: relative; background: #fff; border-radius: 20px; width: min(680px, 100%); max-height: 88vh; overflow-y: auto; padding: 34px clamp(20px, 4vw, 38px); box-shadow: var(--shadow-lg); border-top: 5px solid var(--cat, var(--teal)); animation: mpop .25s cubic-bezier(.2,.8,.3,1); }
-      .modal-x { position: absolute; top: 12px; right: 14px; width: 38px; height: 38px; border: 0; border-radius: 10px; background: var(--soft); color: var(--navy); font-size: 24px; line-height: 1; cursor: pointer; transition: background .2s; }
-      .modal-x:hover { background: #dde8eb; }
+      .modal-card { position: relative; background: var(--card); border-radius: 20px; width: min(680px, 100%); max-height: 88vh; overflow-y: auto; padding: 34px clamp(20px, 4vw, 38px); box-shadow: var(--shadow-lg); border-top: 5px solid var(--cat, var(--teal)); animation: mpop .25s cubic-bezier(.2,.8,.3,1); }
+      .modal-x { position: absolute; top: 12px; right: 14px; width: 38px; height: 38px; border: 0; border-radius: 10px; background: var(--soft); color: var(--heading); font-size: 24px; line-height: 1; cursor: pointer; transition: background .2s; }
+      .modal-x:hover { background: var(--line); }
       .m-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-right: 44px; }
       .m-domain { font-family: var(--head); font-weight: 600; font-size: 13px; color: var(--muted); }
       .modal-card h3 { font-size: clamp(21px, 3.4vw, 26px); margin: 13px 0 11px; }
-      .m-long { color: #41505d; font-size: 15.5px; line-height: 1.65; }
+      .m-long { color: var(--ink-2); font-size: 15.5px; line-height: 1.65; }
       .m-section h4 { font-family: var(--head); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--teal); margin: 20px 0 10px; }
-      .m-section ul { margin: 0 0 0 18px; color: #41505d; }
+      .m-section ul { margin: 0 0 0 18px; color: var(--ink-2); }
       .m-section li { margin: 5px 0; }
       .m-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
       @keyframes mfade { from { opacity: 0 } to { opacity: 1 } }
@@ -220,7 +221,7 @@
       html.js .reveal:not(.in) { opacity: 0; transform: translateY(22px); }
 
       @media (max-width: 860px) {
-        .nav-links { position: fixed; inset: 64px 0 auto 0; background: #fff; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 0; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); transform: translateY(-130%); transition: transform .3s; }
+        .nav-links { position: fixed; inset: 64px 0 auto 0; background: var(--card); flex-direction: column; align-items: stretch; gap: 0; padding: 8px 0; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); transform: translateY(-130%); transition: transform .3s; }
         .nav-links.open { transform: none; }
         .nav-links a { padding: 13px 7vw; }
         .nav-cta { margin: 8px 7vw; text-align: center; }
@@ -229,6 +230,45 @@
         .photo-wrap { order: -1; }
         .photo-ring { width: 200px; height: 200px; }
         section { padding: 64px 0; }
+      }
+      /* ----- Formation & certification ----- */
+      .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+      .edu-card { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px 20px 20px; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+      .edu-card::before { content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 100%; background: var(--teal); opacity: .55; }
+      .edu-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(15, 42, 67, .10); border-color: var(--line); }
+      .edu-card.is-cert::before { background: var(--violet); opacity: .65; }
+      .edu-date { display: block; font-family: var(--head); font-weight: 700; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+      .edu-school { font-family: var(--head); font-weight: 700; font-size: 17px; color: var(--heading); line-height: 1.25; margin: 10px 0 6px; }
+      .edu-degree { color: var(--ink-2); font-size: 14.5px; margin: 0 0 14px; }
+      .edu-meta { font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+      .edu-link { font-size: 13px; font-weight: 600; color: var(--teal); text-decoration: none; }
+      .edu-link:hover { text-decoration: underline; }
+      .band { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+      /* ----- Theme sombre ----- */
+      [data-theme="dark"] {
+        --navy: #1d3b57; --navy-2: #16304a;
+        --heading: #f2f7fb; --ink: #e3edf5; --ink-2: #cbdae6; --muted: #a4bacd;
+        --teal: #3ac2ce; --teal-2: #6cdbe4;
+        --bg: #0b1520; --card: #111e2b; --line: #1e3244; --soft: #162c36;
+        --nav-bg: rgba(11, 21, 32, 0.86);
+        --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+        --shadow-lg: 0 20px 50px rgba(0, 0, 0, .60);
+      }
+      [data-theme="dark"] .pthumb { filter: brightness(.88) contrast(1.02); }
+      [data-theme="dark"] .band { background: #0e1a26; }
+      .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--heading); cursor: pointer; transition: border-color .2s, transform .2s; flex: none; }
+      .theme-toggle:hover { border-color: var(--teal); transform: translateY(-1px); }
+      .theme-toggle svg { width: 17px; height: 17px; fill: currentColor; }
+      .theme-toggle .ico-sun { display: none; }
+      [data-theme="dark"] .theme-toggle .ico-sun { display: block; }
+      [data-theme="dark"] .theme-toggle .ico-moon { display: none; }
+      /* ----- Dynamisme ----- */
+      .scroll-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; z-index: 60; background: linear-gradient(90deg, var(--teal), var(--teal-2)); transition: width .1s linear; }
+      .nav-links a.current { color: var(--teal); }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { transition: none !important; }
+        .scroll-bar { display: none; }
       }
     </style>
     <script type="application/ld+json">
@@ -248,6 +288,7 @@
     </script>
   </head>
   <body>
+    <div class="scroll-bar" id="scroll-bar" aria-hidden="true"></div>
     <nav id="nav">
       <div class="wrap nav-in">
         <a href="#top" class="brand"><span class="mono">NM</span><span class="brand-txt"><b>Noumabeu Moutacdie Jordan</b><span class="brand-sub">DevOps & Cloud · Développeur</span></span></a>
@@ -257,6 +298,8 @@
           <a href="#skills">Compétences</a>
           <a href="#experience">Parcours</a>
           <a href="#projects">Projets</a>
+          <a href="#education">Formation</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Basculer le theme clair ou sombre" title="Thème clair / sombre"><svg class="ico-sun" viewBox="0 0 24 24"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-13a1 1 0 0 1-1-1V1a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1zm0 20a1 1 0 0 1-1-1v-2a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1zM4 13H2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2zm18 0h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2zM5.6 6.99a1 1 0 0 1-.7-.28l-1.4-1.4a1 1 0 1 1 1.4-1.42l1.4 1.41a1 1 0 0 1-.7 1.7zm12.8 12.8a1 1 0 0 1-.7-.29l-1.4-1.4a1 1 0 0 1 1.4-1.42l1.42 1.41a1 1 0 0 1-.71 1.7zM18.4 6.99a1 1 0 0 1-.71-1.7l1.41-1.41a1 1 0 1 1 1.41 1.41l-1.4 1.42a1 1 0 0 1-.71.28zM5.6 19.79a1 1 0 0 1-.71-1.7l1.41-1.42a1 1 0 0 1 1.41 1.42l-1.4 1.4a1 1 0 0 1-.71.3z"/></svg><svg class="ico-moon" viewBox="0 0 24 24"><path d="M21.5 14.1A9 9 0 1 1 9.9 2.5a7 7 0 0 0 11.6 11.6z"/></svg></button>
           <a href="#contact" class="nav-cta">Me contacter</a>
         </div>
       </div>
@@ -278,10 +321,10 @@
             </a>
           </div>
           <div class="hero-stats">
-            <div><div class="n">18+</div><div class="l">Projets publics</div></div>
+            <div><div class="n" data-count="18" data-suffix="+">0</div><div class="l">Projets publics</div></div>
             <div><div class="n">AWS SAA</div><div class="l">Certifié 2024-27</div></div>
-            <div><div class="n">6</div><div class="l">Expériences</div></div>
-            <div><div class="n">3</div><div class="l">Démos en ligne</div></div>
+            <div><div class="n" data-count="6">0</div><div class="l">Expériences</div></div>
+            <div><div class="n" data-count="3">0</div><div class="l">Démos en ligne</div></div>
           </div>
         </div>
         <div class="photo-wrap">
@@ -312,7 +355,7 @@
         </div>
       </section>
 
-      <section id="skills" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+      <section id="skills" class="band">
         <div class="wrap">
           <div class="reveal">
             <span class="eyebrow">Compétences</span>
@@ -334,7 +377,7 @@
         </div>
       </section>
 
-      <section id="projects" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+      <section id="projects" class="band">
         <div class="wrap">
           <div class="reveal">
             <span class="eyebrow">Réalisations</span>
@@ -352,6 +395,42 @@
               <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 3.9-1.4 6.8-5.2 6.8-9.7C22 6.6 17.5 2 12 2z"/></svg>
               Tous mes dépôts sur GitHub
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">Formation</span>
+            <h2 class="sec-title">Comment j'en suis arrivé là.</h2>
+            <p class="sec-intro">Un cursus d'ingénierie logicielle doublé d'une spécialisation cloud et DevOps, validée par une certification AWS.</p>
+          </div>
+          <div class="edu-grid">
+            <article class="edu-card reveal">
+              <span class="edu-date">2025 - en cours</span>
+              <h3 class="edu-school">Université Protestante d'Afrique Centrale</h3>
+              <p class="edu-degree">Master 2 - Génie Logiciel</p>
+              <span class="edu-meta">Yaoundé, Cameroun</span>
+            </article>
+            <article class="edu-card reveal">
+              <span class="edu-date">2022 - 2025</span>
+              <h3 class="edu-school">Université Protestante d'Afrique Centrale</h3>
+              <p class="edu-degree">Licence professionnelle - Génie Informatique / Génie Logiciel</p>
+              <span class="edu-meta">Yaoundé, Cameroun</span>
+            </article>
+            <article class="edu-card reveal">
+              <span class="edu-date">2023 - 2024</span>
+              <h3 class="edu-school">WORKETYAMO Training Center</h3>
+              <p class="edu-degree">Programme DevOps &amp; Cloud AWS</p>
+              <span class="edu-meta">Cameroun</span>
+            </article>
+            <article class="edu-card is-cert reveal">
+              <span class="edu-date">2024 - 2027</span>
+              <h3 class="edu-school">Amazon Web Services</h3>
+              <p class="edu-degree">AWS Certified Solutions Architect - Associate</p>
+              <a class="edu-link" href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ed82d2e1d27545f3b35948eacaa0fe36" target="_blank" rel="noopener">Vérifier la certification</a>
+            </article>
           </div>
         </div>
       </section>
@@ -417,21 +496,27 @@
 
       const EXPERIENCE = [
         ["Consultant DevOps & Développeur Backend", "Corextreme Technologies", "Janv. 2026 - Présent", [
-          "Plateforme de paris sportifs & gaming à forte charge, architecture microservices (16+ services).",
+          "Plateforme de paris sportifs & gaming à forte charge : architecture distribuée de 35 microservices en production.",
+          "Orchestration Kubernetes : déploiements progressifs sans interruption, autoscaling (HPA), sondes de santé, configurations et secrets.",
+          "Infrastructure AWS : dimensionnement des services, réseau et sécurité IAM (rôles, moindre privilège, cloisonnement des environnements).",
           "Développement de services back-end : APIs, intégrations inter-services, traitements temps réel.",
           "Industrialisation DevOps : conteneurisation, pipelines CI/CD, déploiements et observabilité.",
         ]],
-        ["Cloud Engineer · Déploiement AWS", "ALORI (Remote)", "Nov. 2025 - Présent", [
-          "Déploiement d'une application de microfinance sur AWS Amplify (hosting, CI/CD, environnements managés).",
-          "Pipeline d'intégration continue, sécurisation (IAM, variables, branches) et optimisation des builds.",
+        ["Cloud Engineer AWS & Développeur Full-stack", "ALORI (Remote)", "Nov. 2025 - Présent", [
+          "SkillsOri (skillsori.com) : SaaS multi-tenant de création de CV, back-end Django / DRF, front Next.js 16 / React 19, PostgreSQL.",
+          "Architecture serverless AWS : conteneur sur ECR exécuté en Lambda derrière API Gateway, base Aurora PostgreSQL, médias sur S3, secrets dans Secrets Manager.",
+          "CI/CD GitLab authentifié en OIDC vers un rôle IAM (STS), sans clé d'accès statique ; scan d'images Trivy.",
+          "Application de microfinance sur AWS Amplify : hosting, CI/CD, environnements managés, sécurisation IAM et optimisation des builds.",
         ]],
-        ["Formateur Cloud Computing (AWS / DevOps)", "IFP-T, Yaoundé", "Oct. 2025 - Présent", [
+        ["Formateur Cloud Computing (AWS / DevOps)", "IFP-T, Yaoundé", "Oct. 2025 - Mars 2026", [
           "Conception et animation de formations : AWS, Azure, GCP, IaC (Terraform), Ansible, Docker, CI/CD.",
           "Labs pratiques, encadrement et accompagnement à la certification AWS (Foundational & Associate).",
         ]],
-        ["DevOps & Architecte Cloud", "Global Technologies & Associates", "Mars 2025 - Août 2025", [
-          "Module de gestion hospitalière (Odoo 18) : Docker, provisioning Terraform (VPC, EC2, SG), déploiement Ansible.",
-          "Pipeline GitLab CI de bout en bout (build, tests, push registry, provision + deploy) ; cloud hybride via Azure Arc.",
+        ["DevOps & Architecte Cloud", "Global Technology & Associates", "Mars 2025 - Août 2025", [
+          "Application de gestion hospitalière sur Odoo 18, aujourd'hui en production dans un établissement de santé : 47 modèles métier couvrant consultations, hospitalisations, maternité, laboratoire, pharmacie et facturation en FCFA.",
+          "Gouvernance des accès par rôle soignant (12 groupes de sécurité, 409 règles), 14 rapports PDF QWeb et 8 tâches planifiées (stock bas, administrations manquées, factures en retard).",
+          "Industrialisation : conteneurisation Docker et PostgreSQL, provisioning Terraform (VPC, EC2, SG), configuration et déploiement Ansible, cloud hybride via Azure Arc.",
+          "CI/CD de bout en bout : contrôles qualité (pylint-odoo, Bandit, Semgrep), build d'image, déploiement automatisé et health-check.",
         ]],
         ["Développeur Odoo 17", "Mission indépendante", "Sept. 2024 - Nov. 2024", [
           "Développement et personnalisation de modules Odoo 17 (Python, ORM, héritage de modèles).",
@@ -445,6 +530,13 @@
 
       const GH = "https://github.com/Moutacdie2000/";
       const PROJECTS = [
+        { cat: "backend", feat: true, title: "SkillsOri", slug: "skillsori", domain: "SaaS multi-tenant \u00b7 Serverless AWS \u00b7 Projet client en production",
+          desc: "SaaS de cr\u00e9ation de CV en ligne con\u00e7u de bout en bout : API Django / DRF et front Next.js 16, d\u00e9ploy\u00e9s en serverless sur AWS avec une cha\u00eene CI/CD sans cl\u00e9 d'acc\u00e8s statique.",
+          long: "Un SaaS multi-tenant de cr\u00e9ation de CV, con\u00e7u, d\u00e9velopp\u00e9 et mis en production de bout en bout. L'API Django / DRF est packag\u00e9e en image conteneur et ex\u00e9cut\u00e9e en AWS Lambda derri\u00e8re API Gateway, avec une base Aurora PostgreSQL et des m\u00e9dias d\u00e9pos\u00e9s directement sur S3 via des URL pr\u00e9-sign\u00e9es. Chaque CV publi\u00e9 est servi sur son propre sous-domaine. La cha\u00eene de livraison s'authentifie aupr\u00e8s d'AWS par OIDC et un r\u00f4le IAM temporaire, sans aucune cl\u00e9 d'acc\u00e8s stock\u00e9e.",
+          highlights: ["Back-end Django 4.2 / DRF, front Next.js 16 / React 19 / TypeScript", "Image conteneur sur ECR ex\u00e9cut\u00e9e en Lambda derri\u00e8re API Gateway", "Base Aurora PostgreSQL, m\u00e9dias sur S3 par URL pr\u00e9-sign\u00e9e", "Secrets centralis\u00e9s dans AWS Secrets Manager", "CI/CD GitLab en OIDC vers un r\u00f4le IAM (STS), sans cl\u00e9 statique", "Scan d'images Trivy, cible alternative EC2 / Docker (Nginx, TLS Let's Encrypt)", "Authentification \u00e0 jetons expirants et 2FA TOTP, quotas par plan", "Abonnements PayPal et Mobile Money (MTN / Orange)", "Profils publics sur sous-domaines, internationalisation FR / EN", "Tests end-to-end Playwright"],
+          tags: ["Django", "Next.js", "AWS Lambda", "Aurora", "Serverless"],
+          skills: ["Python", "Django", "Next.js", "React", "TypeScript", "AWS", "Serverless", "Lambda", "CI/CD", "Docker"],
+          demo: "https://skillsori.com" },
         { cat: "cloud", feat: true, title: "AWS Landing Zone", domain: "Cloud & DevOps · Gouvernance multi-comptes (IaC)",
           desc: "Socle d'entreprise multi-comptes : Organizations, SCP, IAM Identity Center, logging centralisé et GuardDuty, en Terraform / Terragrunt.",
           long: "Un socle d'entreprise (Landing Zone) qui pose les fondations de gouvernance, de sécurité et de conformité avant tout déploiement applicatif sur AWS. L'ensemble est versionné en Terraform / Terragrunt pour rester reproductible et auditable.",
@@ -500,12 +592,12 @@
           highlights: ["Architecture multi-tenant avec RBAC", "Monitoring d'uptime et pages de statut publiques", "Gestion d'incidents", "Abonnements et facturation Stripe", "Rendu incrémental (ISR)", "56 tests"],
           skills: ["Next.js 14", "Prisma", "Auth.js v5", "Stripe", "RBAC", "Multi-tenant", "ISR", "TypeScript", "PostgreSQL"],
           tags: ["Next.js", "Prisma", "Auth.js", "Stripe"], repo: "pulse-monitoring" },
-        { cat: "backend", title: "Odoo 18 · Gestion hospitalière", domain: "ERP · Santé",
-          desc: "Module métier Odoo 18 : patients, consultations et hospitalisations. Modèles Python / ORM et vues XML.",
-          long: "Un module métier Odoo 18 pour la gestion hospitalière : suivi des patients, des consultations et des hospitalisations, intégré au socle Odoo via son ORM et ses vues. Développement Python orienté métier.",
-          highlights: ["Modèles métier (patients, consultations, hospitalisations)", "Développement Python sur l'ORM Odoo", "Vues XML et logique métier", "Gestion des dépendances tierces"],
-          skills: ["Odoo 18", "Python", "ORM Odoo", "XML", "Modules métier", "PostgreSQL"],
-          tags: ["Odoo 18", "Python", "ORM", "XML"], repo: "addons" },
+        { cat: "backend", feat: true, title: "Odoo 18 · Gestion hospitalière", domain: "ERP Santé · En production dans un hôpital",
+          desc: "Application hospitalière complète sur Odoo 18 : 47 modèles métier, 14 rapports PDF, 12 rôles soignants et CI/CD Docker. En production au St Thérèse Medical Centre (Nomayos, Cameroun).",
+          long: "Une application hospitalière complète développée sur Odoo 18, aujourd'hui utilisée au quotidien par un établissement de santé. Elle couvre la chaîne de soins de bout en bout : admission des patients, consultations, hospitalisations et suivi des paramètres vitaux, maternité (accouchements, nouveau-nés, calendrier vaccinal PEV), laboratoire (microbiologie, antibiogramme, ophtalmologie), pharmacie et stock, puis facturation, cautions et encaissements en FCFA. Environ 44 000 lignes de code (26 400 Python, 17 900 XML) et 47 modèles métier, avec une gouvernance des accès fine par rôle soignant et une chaîne de livraison automatisée de bout en bout.",
+          highlights: ["47 modèles métier Odoo (39 persistants et 8 assistants), environ 44 000 lignes de code", "Parcours de soins : consultations, hospitalisations, paramètres vitaux, actes et diagnostics", "Maternité et pédiatrie : accouchements, nouveau-nés, calendrier vaccinal PEV camerounais", "Laboratoire : microbiologie, antibiogramme, examens ophtalmologiques", "Pharmacie et stock : mouvements, seuils d'alerte, administrations médicamenteuses", "Facturation, cautions et paiements en FCFA, gestion multi-société", "14 rapports PDF QWeb : factures, bons de caisse, bulletins de laboratoire, certificat de naissance", "12 groupes de sécurité métier et 409 règles d'accès, cloisonnement par société", "8 tâches planifiées : stock bas, administrations manquées, factures en retard", "5 tableaux de bord : médecin, infirmier, facturation, statistiques", "CI/CD GitHub Actions : contrôles qualité, build d'image, déploiement SSH, mise à jour du module et health-check", "Docker et PostgreSQL 17, registre privé, 16 scripts de migration versionnés", "Qualité et sécurité en CI : pylint-odoo, Bandit, Semgrep, tests automatisés"],
+          skills: ["Odoo 18", "Python", "ORM Odoo", "XML", "QWeb", "PostgreSQL", "Docker", "CI/CD", "GitHub Actions"],
+          tags: ["Odoo 18", "Python", "PostgreSQL", "Docker", "CI/CD"], repo: "addons", demo: "https://stheresenomayos.org/" },
         { cat: "backend", title: "Odoo 15 · Services AWS", domain: "ERP · Intégration Cloud",
           desc: "Module Odoo 15 ajoutant au site web une section dynamique de services AWS gérée depuis le back-office.",
           long: "Un module Odoo 15 qui enrichit le site web d'une section dynamique présentant des services AWS, administrable directement depuis le back-office Odoo. Un pont entre l'ERP et un catalogue cloud.",
@@ -562,13 +654,15 @@
       // Rôles / postes (un projet peut servir plusieurs profils)
       const ROLES = { all: "Tous les profils", devops: "DevOps & Cloud", backend: "Backend & APIs", fullstack: "Full-stack & Web", pod: "Python / Odoo / .NET" };
       const ROLE_MAP = {
-        devops: ["aws-landing-zone-terraform", "eks-microservices-gitops", "aws-webapp-3tier-ha", "observability-devsecops", "serverless-event-driven-cdk", "buildpilot"],
-        backend: ["buildpilot", "boxoffice-ticketing", "bazar-marketplace", "pulse-monitoring", "addons", "taf-odoo15", "asso-stock", "serverless-event-driven-cdk", "trading-sim", "grid-mission-control"],
-        fullstack: ["buildpilot", "pulse-monitoring", "asso-stock", "trading-sim", "grid-mission-control", "rooms-draw-guess", "orbit-data-story", "sudoku", "projetgit"],
-        pod: ["boxoffice-ticketing", "bazar-marketplace", "addons", "taf-odoo15", "observability-devsecops"],
+        devops: ["skillsori", "addons", "aws-landing-zone-terraform", "eks-microservices-gitops", "aws-webapp-3tier-ha", "observability-devsecops", "serverless-event-driven-cdk", "buildpilot"],
+        backend: ["skillsori", "buildpilot", "boxoffice-ticketing", "bazar-marketplace", "pulse-monitoring", "addons", "taf-odoo15", "asso-stock", "serverless-event-driven-cdk", "trading-sim", "grid-mission-control"],
+        fullstack: ["skillsori", "buildpilot", "pulse-monitoring", "asso-stock", "trading-sim", "grid-mission-control", "rooms-draw-guess", "orbit-data-story", "sudoku", "projetgit"],
+        pod: ["skillsori", "boxoffice-ticketing", "bazar-marketplace", "addons", "taf-odoo15", "observability-devsecops"],
       };
 
       // ----- Render -----
+      // Identifiant d'un projet : le depot GitHub, ou un slug pour les projets sans depot public.
+      const slugOf = (p) => p.repo || p.slug;
       const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 
       const sg = document.getElementById("tech-grid");
@@ -599,7 +693,7 @@
         c.style.setProperty("--cat", CATCOLOR[p.cat]);
         c.tabIndex = 0; c.setAttribute("role", "button"); c.setAttribute("aria-label", "Voir le détail du projet " + p.title);
         const feat = p.feat ? `<span class="pfeat">★ Mis en avant</span>` : "";
-        c.innerHTML = `<img class="pthumb" src="assets/projects/${p.repo}.png" alt="Aperçu du projet ${p.title}" decoding="async" onerror="this.style.display='none'">
+        c.innerHTML = `<img class="pthumb" src="assets/projects/${slugOf(p)}.png" alt="Aperçu du projet ${p.title}" decoding="async" onerror="this.style.display='none'">
           <div class="pbody">
             <div class="ptop"><span class="pcat">${CATS[p.cat]}</span>${feat}</div>
             <h3>${p.title}</h3><p class="pdesc">${p.desc}</p>
@@ -614,7 +708,7 @@
       const countEl = document.getElementById("filter-count");
       function renderProjects() {
         const list = PROJECTS.filter(p =>
-          (curRole === "all" || (ROLE_MAP[curRole] || []).includes(p.repo)) &&
+          (curRole === "all" || (ROLE_MAP[curRole] || []).includes(slugOf(p))) &&
           (curSkill === "all" || (p.skills || []).concat(p.tags || []).join(" ").toLowerCase().includes(curSkill.toLowerCase())));
         grid.innerHTML = "";
         list.forEach(p => grid.appendChild(projectCard(p)));
@@ -644,7 +738,7 @@
       const modal = document.getElementById("modal");
       function openProject(p) {
         modal.style.setProperty("--cat", CATCOLOR[p.cat]);
-        document.getElementById("m-thumbwrap").style.display = ""; document.getElementById("m-thumb").src = "assets/projects/" + p.repo + ".png";
+        document.getElementById("m-thumbwrap").style.display = ""; document.getElementById("m-thumb").src = "assets/projects/" + slugOf(p) + ".png";
         document.getElementById("m-cat").textContent = CATS[p.cat];
         document.getElementById("m-domain").textContent = p.domain || "";
         document.getElementById("m-title").textContent = p.title;
@@ -652,7 +746,8 @@
         document.getElementById("m-highlights").innerHTML = (p.highlights || []).map(h => `<li>${h}</li>`).join("");
         document.getElementById("m-skills").innerHTML = (p.skills || p.tags).map(s => `<span class="chip">${s}</span>`).join("");
         const demo = p.demo ? `<a class="plink demo" href="${p.demo}" target="_blank" rel="noopener">${demoIco}Voir la démo</a>` : "";
-        document.getElementById("m-links").innerHTML = `<a class="plink code" href="${GH + p.repo}" target="_blank" rel="noopener">${codeIco}Code source</a>${demo}`;
+        const code = p.repo ? `<a class="plink code" href="${GH + p.repo}" target="_blank" rel="noopener">${codeIco}Code source</a>` : "";
+        document.getElementById("m-links").innerHTML = `${code}${demo}`;
         modal.hidden = false; document.body.classList.add("modal-open");
         modal.querySelector(".modal-card").scrollTop = 0;
         modal.querySelector(".modal-x").focus();
@@ -686,6 +781,82 @@
       addEventListener("load", revealVisible);
       revealVisible();
       setTimeout(() => reveals.forEach(r => r.classList.add("in")), 2600);
+
+      // ----- Theme clair / sombre -----
+      (() => {
+        const KEY = "theme";
+        const root = document.documentElement;
+        const apply = (t) => { root.setAttribute("data-theme", t); root.style.colorScheme = t; };
+        const stored = localStorage.getItem(KEY);
+        apply(stored || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+        document.getElementById("theme-toggle").addEventListener("click", () => {
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          apply(next); localStorage.setItem(KEY, next);
+        });
+        matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+          if (!localStorage.getItem(KEY)) apply(e.matches ? "dark" : "light");
+        });
+      })();
+
+      // ----- Barre de progression de lecture -----
+      (() => {
+        const bar = document.getElementById("scroll-bar");
+        if (!bar) return;
+        const update = () => {
+          const h = document.documentElement.scrollHeight - innerHeight;
+          bar.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + "%";
+        };
+        addEventListener("scroll", update, { passive: true });
+        addEventListener("resize", update);
+        update();
+      })();
+
+      // ----- Compteurs animes du hero -----
+      (() => {
+        const nums = document.querySelectorAll(".hero-stats .n[data-count]");
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          nums.forEach(el => { el.textContent = el.dataset.count + (el.dataset.suffix || ""); });
+          return;
+        }
+        const run = (el) => {
+          const target = +el.dataset.count, suffix = el.dataset.suffix || "", dur = 1100, t0 = performance.now();
+          const step = (t) => {
+            const k = Math.min((t - t0) / dur, 1);
+            el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3))) + (k === 1 ? suffix : "");
+            if (k < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        };
+        const obs = new IntersectionObserver((es) => {
+          es.forEach(e => { if (e.isIntersecting) { run(e.target); obs.unobserve(e.target); } });
+        }, { threshold: 0.5 });
+        nums.forEach(el => obs.observe(el));
+      })();
+
+      // ----- Apparition en cascade dans les grilles -----
+      (() => {
+        document.querySelectorAll(".edu-grid, .projects-grid, .timeline").forEach(grid => {
+          [...grid.children].forEach((child, i) => {
+            if (child.classList.contains("reveal")) child.style.transitionDelay = Math.min(i, 6) * 70 + "ms";
+          });
+        });
+      })();
+
+      // ----- Section active dans la navigation -----
+      (() => {
+        const links = [...document.querySelectorAll("#navlinks a")].filter(a => a.hash);
+        const map = new Map(links.map(a => [a.hash.slice(1), a]));
+        const secs = [...map.keys()].map(id => document.getElementById(id)).filter(Boolean);
+        const obs = new IntersectionObserver((es) => {
+          es.forEach(e => {
+            if (e.isIntersecting) {
+              links.forEach(a => a.classList.remove("current"));
+              const cur = map.get(e.target.id); if (cur) cur.classList.add("current");
+            }
+          });
+        }, { rootMargin: "-45% 0px -50% 0px" });
+        secs.forEach(sec => obs.observe(sec));
+      })();
     </script>
   </body>
 </html>
