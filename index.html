@@ -449,6 +449,13 @@
 
       const GH = "https://github.com/Moutacdie2000/";
       const PROJECTS = [
+        { cat: "backend", feat: true, title: "SkillsOri", slug: "skillsori", domain: "SaaS multi-tenant \u00b7 Serverless AWS \u00b7 Projet client en production",
+          desc: "SaaS de cr\u00e9ation de CV en ligne con\u00e7u de bout en bout : API Django / DRF et front Next.js 16, d\u00e9ploy\u00e9s en serverless sur AWS avec une cha\u00eene CI/CD sans cl\u00e9 d'acc\u00e8s statique.",
+          long: "Un SaaS multi-tenant de cr\u00e9ation de CV, con\u00e7u, d\u00e9velopp\u00e9 et mis en production de bout en bout. L'API Django / DRF est packag\u00e9e en image conteneur et ex\u00e9cut\u00e9e en AWS Lambda derri\u00e8re API Gateway, avec une base Aurora PostgreSQL et des m\u00e9dias d\u00e9pos\u00e9s directement sur S3 via des URL pr\u00e9-sign\u00e9es. Chaque CV publi\u00e9 est servi sur son propre sous-domaine. La cha\u00eene de livraison s'authentifie aupr\u00e8s d'AWS par OIDC et un r\u00f4le IAM temporaire, sans aucune cl\u00e9 d'acc\u00e8s stock\u00e9e.",
+          highlights: ["Back-end Django 4.2 / DRF, front Next.js 16 / React 19 / TypeScript", "Image conteneur sur ECR ex\u00e9cut\u00e9e en Lambda derri\u00e8re API Gateway", "Base Aurora PostgreSQL, m\u00e9dias sur S3 par URL pr\u00e9-sign\u00e9e", "Secrets centralis\u00e9s dans AWS Secrets Manager", "CI/CD GitLab en OIDC vers un r\u00f4le IAM (STS), sans cl\u00e9 statique", "Scan d'images Trivy, cible alternative EC2 / Docker (Nginx, TLS Let's Encrypt)", "Authentification \u00e0 jetons expirants et 2FA TOTP, quotas par plan", "Abonnements PayPal et Mobile Money (MTN / Orange)", "Profils publics sur sous-domaines, internationalisation FR / EN", "Tests end-to-end Playwright"],
+          tags: ["Django", "Next.js", "AWS Lambda", "Aurora", "Serverless"],
+          skills: ["Python", "Django", "Next.js", "React", "TypeScript", "AWS", "Serverless", "Lambda", "CI/CD", "Docker"],
+          demo: "https://skillsori.com" },
         { cat: "cloud", feat: true, title: "AWS Landing Zone", domain: "Cloud & DevOps · Gouvernance multi-comptes (IaC)",
           desc: "Socle d'entreprise multi-comptes : Organizations, SCP, IAM Identity Center, logging centralisé et GuardDuty, en Terraform / Terragrunt.",
           long: "Un socle d'entreprise (Landing Zone) qui pose les fondations de gouvernance, de sécurité et de conformité avant tout déploiement applicatif sur AWS. L'ensemble est versionné en Terraform / Terragrunt pour rester reproductible et auditable.",
@@ -566,13 +573,15 @@
       // Rôles / postes (un projet peut servir plusieurs profils)
       const ROLES = { all: "Tous les profils", devops: "DevOps & Cloud", backend: "Backend & APIs", fullstack: "Full-stack & Web", pod: "Python / Odoo / .NET" };
       const ROLE_MAP = {
-        devops: ["aws-landing-zone-terraform", "eks-microservices-gitops", "aws-webapp-3tier-ha", "observability-devsecops", "serverless-event-driven-cdk", "buildpilot"],
-        backend: ["buildpilot", "boxoffice-ticketing", "bazar-marketplace", "pulse-monitoring", "addons", "taf-odoo15", "asso-stock", "serverless-event-driven-cdk", "trading-sim", "grid-mission-control"],
-        fullstack: ["buildpilot", "pulse-monitoring", "asso-stock", "trading-sim", "grid-mission-control", "rooms-draw-guess", "orbit-data-story", "sudoku", "projetgit"],
-        pod: ["boxoffice-ticketing", "bazar-marketplace", "addons", "taf-odoo15", "observability-devsecops"],
+        devops: ["skillsori", "aws-landing-zone-terraform", "eks-microservices-gitops", "aws-webapp-3tier-ha", "observability-devsecops", "serverless-event-driven-cdk", "buildpilot"],
+        backend: ["skillsori", "buildpilot", "boxoffice-ticketing", "bazar-marketplace", "pulse-monitoring", "addons", "taf-odoo15", "asso-stock", "serverless-event-driven-cdk", "trading-sim", "grid-mission-control"],
+        fullstack: ["skillsori", "buildpilot", "pulse-monitoring", "asso-stock", "trading-sim", "grid-mission-control", "rooms-draw-guess", "orbit-data-story", "sudoku", "projetgit"],
+        pod: ["skillsori", "boxoffice-ticketing", "bazar-marketplace", "addons", "taf-odoo15", "observability-devsecops"],
       };
 
       // ----- Render -----
+      // Identifiant d'un projet : le depot GitHub, ou un slug pour les projets sans depot public.
+      const slugOf = (p) => p.repo || p.slug;
       const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 
       const sg = document.getElementById("tech-grid");
@@ -603,7 +612,7 @@
         c.style.setProperty("--cat", CATCOLOR[p.cat]);
         c.tabIndex = 0; c.setAttribute("role", "button"); c.setAttribute("aria-label", "Voir le détail du projet " + p.title);
         const feat = p.feat ? `<span class="pfeat">★ Mis en avant</span>` : "";
-        c.innerHTML = `<img class="pthumb" src="assets/projects/${p.repo}.png" alt="Aperçu du projet ${p.title}" decoding="async" onerror="this.style.display='none'">
+        c.innerHTML = `<img class="pthumb" src="assets/projects/${slugOf(p)}.png" alt="Aperçu du projet ${p.title}" decoding="async" onerror="this.style.display='none'">
           <div class="pbody">
             <div class="ptop"><span class="pcat">${CATS[p.cat]}</span>${feat}</div>
             <h3>${p.title}</h3><p class="pdesc">${p.desc}</p>
@@ -618,7 +627,7 @@
       const countEl = document.getElementById("filter-count");
       function renderProjects() {
         const list = PROJECTS.filter(p =>
-          (curRole === "all" || (ROLE_MAP[curRole] || []).includes(p.repo)) &&
+          (curRole === "all" || (ROLE_MAP[curRole] || []).includes(slugOf(p))) &&
           (curSkill === "all" || (p.skills || []).concat(p.tags || []).join(" ").toLowerCase().includes(curSkill.toLowerCase())));
         grid.innerHTML = "";
         list.forEach(p => grid.appendChild(projectCard(p)));
@@ -648,7 +657,7 @@
       const modal = document.getElementById("modal");
       function openProject(p) {
         modal.style.setProperty("--cat", CATCOLOR[p.cat]);
-        document.getElementById("m-thumbwrap").style.display = ""; document.getElementById("m-thumb").src = "assets/projects/" + p.repo + ".png";
+        document.getElementById("m-thumbwrap").style.display = ""; document.getElementById("m-thumb").src = "assets/projects/" + slugOf(p) + ".png";
         document.getElementById("m-cat").textContent = CATS[p.cat];
         document.getElementById("m-domain").textContent = p.domain || "";
         document.getElementById("m-title").textContent = p.title;
@@ -656,7 +665,8 @@
         document.getElementById("m-highlights").innerHTML = (p.highlights || []).map(h => `<li>${h}</li>`).join("");
         document.getElementById("m-skills").innerHTML = (p.skills || p.tags).map(s => `<span class="chip">${s}</span>`).join("");
         const demo = p.demo ? `<a class="plink demo" href="${p.demo}" target="_blank" rel="noopener">${demoIco}Voir la démo</a>` : "";
-        document.getElementById("m-links").innerHTML = `<a class="plink code" href="${GH + p.repo}" target="_blank" rel="noopener">${codeIco}Code source</a>${demo}`;
+        const code = p.repo ? `<a class="plink code" href="${GH + p.repo}" target="_blank" rel="noopener">${codeIco}Code source</a>` : "";
+        document.getElementById("m-links").innerHTML = `${code}${demo}`;
         modal.hidden = false; document.body.classList.add("modal-open");
         modal.querySelector(".modal-card").scrollTop = 0;
         modal.querySelector(".modal-x").focus();
