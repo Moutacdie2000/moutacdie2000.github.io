@@ -321,10 +321,11 @@
             </a>
           </div>
           <div class="hero-stats">
-            <div><div class="n" data-count="18" data-suffix="+">0</div><div class="l">Projets publics</div></div>
+            <div><div class="n" data-count="19">19</div><div class="l">Projets</div></div>
+            <div><div class="n" data-count="6">6</div><div class="l">Expériences</div></div>
+            <div><div class="n" data-count="4">4</div><div class="l">Profils techniques</div></div>
+            <div><div class="n" data-count="5">5</div><div class="l">Démos en ligne</div></div>
             <div><div class="n">AWS SAA</div><div class="l">Certifié 2024-27</div></div>
-            <div><div class="n" data-count="6">0</div><div class="l">Expériences</div></div>
-            <div><div class="n" data-count="3">0</div><div class="l">Démos en ligne</div></div>
           </div>
         </div>
         <div class="photo-wrap">
@@ -382,7 +383,7 @@
           <div class="reveal">
             <span class="eyebrow">Réalisations</span>
             <h2 class="sec-title">Projets</h2>
-            <p class="sec-intro">Une sélection de projets open-source. Filtrez par rôle ou par compétence, et cliquez une carte pour ouvrir le détail complet (domaine, points clés, compétences liées et liens).</p>
+            <p class="sec-intro">19 projets, du socle cloud multi-comptes aux produits en production. Filtrez par rôle ou par compétence, et cliquez une carte pour ouvrir le détail complet (domaine, points clés, compétences liées et liens).</p>
           </div>
           <div class="filters">
             <div class="fgroup"><span class="flabel">Filtrer par rôle</span><div class="fchips" id="role-filters"></div></div>
@@ -819,7 +820,9 @@
           return;
         }
         const run = (el) => {
-          const target = +el.dataset.count, suffix = el.dataset.suffix || "", dur = 1100, t0 = performance.now();
+          const target = +el.dataset.count, suffix = el.dataset.suffix || "", dur = 1100;
+          el.textContent = "0";
+          const t0 = performance.now();
           const step = (t) => {
             const k = Math.min((t - t0) / dur, 1);
             el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3))) + (k === 1 ? suffix : "");
