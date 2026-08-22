@@ -56,7 +56,7 @@
       .mono { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-weight: 800; font-size: 16px; color: #061018; background: linear-gradient(135deg, var(--teal-2), var(--teal)); }
       .brand-txt b { font-weight: 700; font-size: 15.5px; color: var(--heading); white-space: nowrap; }
       .brand-sub { display: block; font-family: var(--sans); font-weight: 600; font-size: 11.5px; color: var(--muted); letter-spacing: .02em; }
-      .nav-links { display: flex; align-items: center; gap: 26px; }
+      .nav-links { display: flex; align-items: center; gap: 18px; }
       .nav-links a { font-weight: 600; font-size: 15px; color: var(--ink-2); transition: color .2s; }
       .nav-links a:hover { color: var(--teal); }
       .nav-cta { background: var(--navy); color: #fff !important; padding: 9px 16px; border-radius: 10px; font-size: 14px; transition: transform .2s, background .2s; }
@@ -220,7 +220,7 @@
       .reveal { transition: opacity .6s ease, transform .6s ease; }
       html.js .reveal:not(.in) { opacity: 0; transform: translateY(22px); }
 
-      @media (max-width: 860px) {
+      @media (max-width: 1000px) {
         .nav-links { position: fixed; inset: 64px 0 auto 0; background: var(--card); flex-direction: column; align-items: stretch; gap: 0; padding: 8px 0; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); transform: translateY(-130%); transition: transform .3s; }
         .nav-links.open { transform: none; }
         .nav-links a { padding: 13px 7vw; }
