@@ -511,12 +511,12 @@
           highlights: ["Architecture multi-tenant avec RBAC", "Monitoring d'uptime et pages de statut publiques", "Gestion d'incidents", "Abonnements et facturation Stripe", "Rendu incrémental (ISR)", "56 tests"],
           skills: ["Next.js 14", "Prisma", "Auth.js v5", "Stripe", "RBAC", "Multi-tenant", "ISR", "TypeScript", "PostgreSQL"],
           tags: ["Next.js", "Prisma", "Auth.js", "Stripe"], repo: "pulse-monitoring" },
-        { cat: "backend", title: "Odoo 18 · Gestion hospitalière", domain: "ERP · Santé",
-          desc: "Module métier Odoo 18 : patients, consultations et hospitalisations. Modèles Python / ORM et vues XML.",
-          long: "Un module métier Odoo 18 pour la gestion hospitalière : suivi des patients, des consultations et des hospitalisations, intégré au socle Odoo via son ORM et ses vues. Développement Python orienté métier.",
-          highlights: ["Modèles métier (patients, consultations, hospitalisations)", "Développement Python sur l'ORM Odoo", "Vues XML et logique métier", "Gestion des dépendances tierces"],
-          skills: ["Odoo 18", "Python", "ORM Odoo", "XML", "Modules métier", "PostgreSQL"],
-          tags: ["Odoo 18", "Python", "ORM", "XML"], repo: "addons" },
+        { cat: "backend", feat: true, title: "Odoo 18 · Gestion hospitalière", domain: "ERP Santé · En production dans un hôpital",
+          desc: "Application hospitalière complète sur Odoo 18 : 47 modèles métier, 14 rapports PDF, 12 rôles soignants et CI/CD Docker. En production au St Thérèse Medical Centre (Nomayos, Cameroun).",
+          long: "Une application hospitalière complète développée sur Odoo 18, aujourd'hui utilisée au quotidien par un établissement de santé. Elle couvre la chaîne de soins de bout en bout : admission des patients, consultations, hospitalisations et suivi des paramètres vitaux, maternité (accouchements, nouveau-nés, calendrier vaccinal PEV), laboratoire (microbiologie, antibiogramme, ophtalmologie), pharmacie et stock, puis facturation, cautions et encaissements en FCFA. Environ 44 000 lignes de code (26 400 Python, 17 900 XML) et 47 modèles métier, avec une gouvernance des accès fine par rôle soignant et une chaîne de livraison automatisée de bout en bout.",
+          highlights: ["47 modèles métier Odoo (39 persistants et 8 assistants), environ 44 000 lignes de code", "Parcours de soins : consultations, hospitalisations, paramètres vitaux, actes et diagnostics", "Maternité et pédiatrie : accouchements, nouveau-nés, calendrier vaccinal PEV camerounais", "Laboratoire : microbiologie, antibiogramme, examens ophtalmologiques", "Pharmacie et stock : mouvements, seuils d'alerte, administrations médicamenteuses", "Facturation, cautions et paiements en FCFA, gestion multi-société", "14 rapports PDF QWeb : factures, bons de caisse, bulletins de laboratoire, certificat de naissance", "12 groupes de sécurité métier et 409 règles d'accès, cloisonnement par société", "8 tâches planifiées : stock bas, administrations manquées, factures en retard", "5 tableaux de bord : médecin, infirmier, facturation, statistiques", "CI/CD GitHub Actions : contrôles qualité, build d'image, déploiement SSH, mise à jour du module et health-check", "Docker et PostgreSQL 17, registre privé, 16 scripts de migration versionnés", "Qualité et sécurité en CI : pylint-odoo, Bandit, Semgrep, tests automatisés"],
+          skills: ["Odoo 18", "Python", "ORM Odoo", "XML", "QWeb", "PostgreSQL", "Docker", "CI/CD", "GitHub Actions"],
+          tags: ["Odoo 18", "Python", "PostgreSQL", "Docker", "CI/CD"], repo: "addons", demo: "https://stheresenomayos.org/" },
         { cat: "backend", title: "Odoo 15 · Services AWS", domain: "ERP · Intégration Cloud",
           desc: "Module Odoo 15 ajoutant au site web une section dynamique de services AWS gérée depuis le back-office.",
           long: "Un module Odoo 15 qui enrichit le site web d'une section dynamique présentant des services AWS, administrable directement depuis le back-office Odoo. Un pont entre l'ERP et un catalogue cloud.",
@@ -573,7 +573,7 @@
       // Rôles / postes (un projet peut servir plusieurs profils)
       const ROLES = { all: "Tous les profils", devops: "DevOps & Cloud", backend: "Backend & APIs", fullstack: "Full-stack & Web", pod: "Python / Odoo / .NET" };
       const ROLE_MAP = {
-        devops: ["skillsori", "aws-landing-zone-terraform", "eks-microservices-gitops", "aws-webapp-3tier-ha", "observability-devsecops", "serverless-event-driven-cdk", "buildpilot"],
+        devops: ["skillsori", "addons", "aws-landing-zone-terraform", "eks-microservices-gitops", "aws-webapp-3tier-ha", "observability-devsecops", "serverless-event-driven-cdk", "buildpilot"],
         backend: ["skillsori", "buildpilot", "boxoffice-ticketing", "bazar-marketplace", "pulse-monitoring", "addons", "taf-odoo15", "asso-stock", "serverless-event-driven-cdk", "trading-sim", "grid-mission-control"],
         fullstack: ["skillsori", "buildpilot", "pulse-monitoring", "asso-stock", "trading-sim", "grid-mission-control", "rooms-draw-guess", "orbit-data-story", "sudoku", "projetgit"],
         pod: ["skillsori", "boxoffice-ticketing", "bazar-marketplace", "addons", "taf-odoo15", "observability-devsecops"],
