@@ -263,6 +263,9 @@
       .theme-toggle .ico-sun { display: none; }
       [data-theme="dark"] .theme-toggle .ico-sun { display: block; }
       [data-theme="dark"] .theme-toggle .ico-moon { display: none; }
+      /* ----- Selecteur de langue ----- */
+      .lang-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 11px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--heading); cursor: pointer; transition: border-color .2s, transform .2s, color .2s; flex: none; font-family: var(--head); font-weight: 700; font-size: 12.5px; letter-spacing: .03em; }
+      .lang-toggle:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
       /* ----- Dynamisme ----- */
       .scroll-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; z-index: 60; background: linear-gradient(90deg, var(--teal), var(--teal-2)); transition: width .1s linear; }
       .nav-links a.current { color: var(--teal); }
@@ -291,16 +294,17 @@
     <div class="scroll-bar" id="scroll-bar" aria-hidden="true"></div>
     <nav id="nav">
       <div class="wrap nav-in">
-        <a href="#top" class="brand"><span class="mono">NM</span><span class="brand-txt"><b>Noumabeu Moutacdie Jordan</b><span class="brand-sub">DevOps & Cloud · Développeur</span></span></a>
+        <a href="#top" class="brand"><span class="mono">NM</span><span class="brand-txt"><b>Noumabeu Moutacdie Jordan</b><span class="brand-sub" data-i18n="nav.brandSub">DevOps & Cloud · Développeur</span></span></a>
         <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
         <div class="nav-links" id="navlinks">
-          <a href="#about">Profil</a>
-          <a href="#skills">Compétences</a>
-          <a href="#experience">Parcours</a>
-          <a href="#projects">Projets</a>
-          <a href="#education">Formation</a>
-          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Basculer le theme clair ou sombre" title="Thème clair / sombre"><svg class="ico-sun" viewBox="0 0 24 24"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-13a1 1 0 0 1-1-1V1a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1zm0 20a1 1 0 0 1-1-1v-2a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1zM4 13H2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2zm18 0h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2zM5.6 6.99a1 1 0 0 1-.7-.28l-1.4-1.4a1 1 0 1 1 1.4-1.42l1.4 1.41a1 1 0 0 1-.7 1.7zm12.8 12.8a1 1 0 0 1-.7-.29l-1.4-1.4a1 1 0 0 1 1.4-1.42l1.42 1.41a1 1 0 0 1-.71 1.7zM18.4 6.99a1 1 0 0 1-.71-1.7l1.41-1.41a1 1 0 1 1 1.41 1.41l-1.4 1.42a1 1 0 0 1-.71.28zM5.6 19.79a1 1 0 0 1-.71-1.7l1.41-1.42a1 1 0 0 1 1.41 1.42l-1.4 1.4a1 1 0 0 1-.71.3z"/></svg><svg class="ico-moon" viewBox="0 0 24 24"><path d="M21.5 14.1A9 9 0 1 1 9.9 2.5a7 7 0 0 0 11.6 11.6z"/></svg></button>
-          <a href="#contact" class="nav-cta">Me contacter</a>
+          <a href="#about" data-i18n="nav.about">Profil</a>
+          <a href="#skills" data-i18n="nav.skills">Compétences</a>
+          <a href="#experience" data-i18n="nav.experience">Parcours</a>
+          <a href="#projects" data-i18n="nav.projects">Projets</a>
+          <a href="#education" data-i18n="nav.education">Formation</a>
+          <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Passer le site en anglais" title="Passer le site en anglais">EN</button>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Basculer le theme clair ou sombre" title="Thème clair / sombre" data-i18n-attr='{"aria-label":"theme.ariaLabel","title":"theme.title"}'><svg class="ico-sun" viewBox="0 0 24 24"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-13a1 1 0 0 1-1-1V1a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1zm0 20a1 1 0 0 1-1-1v-2a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1zM4 13H2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2zm18 0h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2zM5.6 6.99a1 1 0 0 1-.7-.28l-1.4-1.4a1 1 0 1 1 1.4-1.42l1.4 1.41a1 1 0 0 1-.7 1.7zm12.8 12.8a1 1 0 0 1-.7-.29l-1.4-1.4a1 1 0 0 1 1.4-1.42l1.42 1.41a1 1 0 0 1-.71 1.7zM18.4 6.99a1 1 0 0 1-.71-1.7l1.41-1.41a1 1 0 1 1 1.41 1.41l-1.4 1.42a1 1 0 0 1-.71.28zM5.6 19.79a1 1 0 0 1-.71-1.7l1.41-1.42a1 1 0 0 1 1.41 1.42l-1.4 1.4a1 1 0 0 1-.71.3z"/></svg><svg class="ico-moon" viewBox="0 0 24 24"><path d="M21.5 14.1A9 9 0 1 1 9.9 2.5a7 7 0 0 0 11.6 11.6z"/></svg></button>
+          <a href="#contact" class="nav-cta" data-i18n="nav.contact">Me contacter</a>
         </div>
       </div>
     </nav>
@@ -308,29 +312,29 @@
     <header class="hero" id="top">
       <div class="wrap hero-grid">
         <div>
-          <span class="status"><span class="dot"></span>Ouvert aux opportunités · DevOps / Cloud / Backend</span>
+          <span class="status"><span class="dot"></span><span data-i18n="hero.status">Ouvert aux opportunités · DevOps / Cloud / Backend</span></span>
           <h1>Noumabeu Moutacdie <span class="ac">Jordan</span></h1>
-          <div class="role">Ingénieur DevOps & Cloud · Développeur Backend & Full-stack</div>
-          <p class="lead">De l'infrastructure au code applicatif : je conçois, automatise et fiabilise des plateformes cloud-native, sécurisées et scalables. Certifié AWS Solutions Architect Associate.</p>
+          <div class="role" data-i18n="hero.role">Ingénieur DevOps & Cloud · Développeur Backend & Full-stack</div>
+          <p class="lead" data-i18n="hero.lead">De l'infrastructure au code applicatif : je conçois, automatise et fiabilise des plateformes cloud-native, sécurisées et scalables. Certifié AWS Solutions Architect Associate.</p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="assets/cv/cv-general.pdf" download>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>Télécharger mon CV
+            <a class="btn btn-primary" id="cv-download" href="assets/cv/cv-general.pdf" download>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg><span data-i18n="hero.ctaCv">Télécharger mon CV</span>
             </a>
             <a class="btn btn-ghost" href="#projects">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16v2H4zm0 6h16v2H4zm0 6h10v2H4z"/></svg>Voir mes projets
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16v2H4zm0 6h16v2H4zm0 6h10v2H4z"/></svg><span data-i18n="hero.ctaProjects">Voir mes projets</span>
             </a>
           </div>
           <div class="hero-stats">
-            <div><div class="n" data-count="19">19</div><div class="l">Projets</div></div>
-            <div><div class="n" data-count="6">6</div><div class="l">Expériences</div></div>
-            <div><div class="n" data-count="4">4</div><div class="l">Profils techniques</div></div>
-            <div><div class="n" data-count="5">5</div><div class="l">Démos en ligne</div></div>
-            <div><div class="n">AWS SAA</div><div class="l">Certifié 2024-27</div></div>
+            <div><div class="n" data-count="19">19</div><div class="l" data-i18n="hero.statProjects">Projets</div></div>
+            <div><div class="n" data-count="6">6</div><div class="l" data-i18n="hero.statExperience">Expériences</div></div>
+            <div><div class="n" data-count="4">4</div><div class="l" data-i18n="hero.statProfiles">Profils techniques</div></div>
+            <div><div class="n" data-count="5">5</div><div class="l" data-i18n="hero.statDemos">Démos en ligne</div></div>
+            <div><div class="n">AWS SAA</div><div class="l" data-i18n="hero.statCertified">Certifié 2024-27</div></div>
           </div>
         </div>
         <div class="photo-wrap">
-          <div class="photo-ring"><img src="assets/avatar.jpg" alt="Photo de Noumabeu Moutacdie Jordan" /></div>
-          <div class="badge-aws"><span class="ico">AWS</span><span><b>Solutions Architect</b><span>Associate · valide 2024-2027</span></span></div>
+          <div class="photo-ring"><img src="assets/avatar.jpg" alt="Photo de Noumabeu Moutacdie Jordan" data-i18n-attr='{"alt":"hero.photoAlt"}' /></div>
+          <div class="badge-aws"><span class="ico">AWS</span><span><b>Solutions Architect</b><span data-i18n="hero.badgeSubtitle">Associate · valide 2024-2027</span></span></div>
         </div>
       </div>
     </header>
@@ -340,17 +344,17 @@
         <div class="wrap">
           <div class="about-grid">
             <div class="reveal">
-              <span class="eyebrow">Profil</span>
-              <h2 class="sec-title">Du provisioning cloud jusqu'à la production</h2>
-              <p>Ingénieur <b>DevOps & Cloud</b> et développeur <b>back-end / full-stack</b>, certifié <b>AWS Solutions Architect Associate</b>. Je conçois et fiabilise des plateformes cloud-native, de l'infrastructure (Terraform, Kubernetes, CI/CD) au code (NestJS, .NET, Python / Django, Odoo).</p>
-              <p>Actuellement <b>Consultant DevOps & Développeur Backend chez Corextreme Technologies</b>. Ouvert aux missions en DevOps, Cloud et back-end.</p>
+              <span class="eyebrow" data-i18n="about.eyebrow">Profil</span>
+              <h2 class="sec-title" data-i18n="about.title">Du provisioning cloud jusqu'à la production</h2>
+              <p data-i18n="about.p1">Ingénieur <b>DevOps & Cloud</b> et développeur <b>back-end / full-stack</b>, certifié <b>AWS Solutions Architect Associate</b>. Je conçois et fiabilise des plateformes cloud-native, de l'infrastructure (Terraform, Kubernetes, CI/CD) au code (NestJS, .NET, Python / Django, Odoo).</p>
+              <p data-i18n="about.p2">Actuellement <b>Consultant DevOps & Développeur Backend chez Corextreme Technologies</b>. Ouvert aux missions en DevOps, Cloud et back-end.</p>
             </div>
             <ul class="quickfacts reveal">
-              <li><span class="k">Localisation</span><span class="v">Yaoundé, Cameroun · ouvert au remote</span></li>
-              <li><span class="k">Rôle actuel</span><span class="v">Consultant DevOps & Dev. Backend, Corextreme</span></li>
+              <li><span class="k" data-i18n="about.factLocationLabel">Localisation</span><span class="v" data-i18n="about.factLocationValue">Yaoundé, Cameroun · ouvert au remote</span></li>
+              <li><span class="k" data-i18n="about.factRoleLabel">Rôle actuel</span><span class="v" data-i18n="about.factRoleValue">Consultant DevOps & Dev. Backend, Corextreme</span></li>
               <li><span class="k">Certification</span><span class="v">AWS Solutions Architect Associate (2024-2027)</span></li>
-              <li><span class="k">Stack clé</span><span class="v">AWS · Terraform · Kubernetes · CI/CD · NestJS · .NET · Python</span></li>
-              <li><span class="k">Langues</span><span class="v">Français (courant) · Anglais (technique)</span></li>
+              <li><span class="k" data-i18n="about.factStackLabel">Stack clé</span><span class="v">AWS · Terraform · Kubernetes · CI/CD · NestJS · .NET · Python</span></li>
+              <li><span class="k" data-i18n="about.factLangsLabel">Langues</span><span class="v" data-i18n="about.factLangsValue">Français (courant) · Anglais (technique)</span></li>
             </ul>
           </div>
         </div>
@@ -359,9 +363,9 @@
       <section id="skills" class="band">
         <div class="wrap">
           <div class="reveal">
-            <span class="eyebrow">Compétences</span>
-            <h2 class="sec-title">Stack technique</h2>
-            <p class="sec-intro">Du cloud et de l'IaC au développement applicatif et à l'observabilité.</p>
+            <span class="eyebrow" data-i18n="skillsSection.eyebrow">Compétences</span>
+            <h2 class="sec-title" data-i18n="skillsSection.title">Stack technique</h2>
+            <p class="sec-intro" data-i18n="skillsSection.intro">Du cloud et de l'IaC au développement applicatif et à l'observabilité.</p>
           </div>
           <div id="tech-grid"></div>
         </div>
@@ -370,9 +374,9 @@
       <section id="experience">
         <div class="wrap">
           <div class="reveal">
-            <span class="eyebrow">Parcours</span>
-            <h2 class="sec-title">Expérience professionnelle</h2>
-            <p class="sec-intro">Six expériences en DevOps, cloud et développement, du stage bancaire à la plateforme à forte charge.</p>
+            <span class="eyebrow" data-i18n="experienceSection.eyebrow">Parcours</span>
+            <h2 class="sec-title" data-i18n="experienceSection.title">Expérience professionnelle</h2>
+            <p class="sec-intro" data-i18n="experienceSection.intro">Six expériences en DevOps, cloud et développement, du stage bancaire à la plateforme à forte charge.</p>
           </div>
           <div class="timeline" id="timeline"></div>
         </div>
@@ -381,20 +385,20 @@
       <section id="projects" class="band">
         <div class="wrap">
           <div class="reveal">
-            <span class="eyebrow">Réalisations</span>
-            <h2 class="sec-title">Projets</h2>
-            <p class="sec-intro">19 projets, du socle cloud multi-comptes aux produits en production. Filtrez par rôle ou par compétence, et cliquez une carte pour ouvrir le détail complet (domaine, points clés, compétences liées et liens).</p>
+            <span class="eyebrow" data-i18n="projectsSection.eyebrow">Réalisations</span>
+            <h2 class="sec-title" data-i18n="projectsSection.title">Projets</h2>
+            <p class="sec-intro" data-i18n="projectsSection.intro">19 projets, du socle cloud multi-comptes aux produits en production. Filtrez par rôle ou par compétence, et cliquez une carte pour ouvrir le détail complet (domaine, points clés, compétences liées et liens).</p>
           </div>
           <div class="filters">
-            <div class="fgroup"><span class="flabel">Filtrer par rôle</span><div class="fchips" id="role-filters"></div></div>
-            <div class="fgroup"><span class="flabel">Filtrer par compétence</span><select id="skill-filter" class="fselect" aria-label="Filtrer par compétence"></select></div>
+            <div class="fgroup"><span class="flabel" data-i18n="projectsSection.filterRole">Filtrer par rôle</span><div class="fchips" id="role-filters"></div></div>
+            <div class="fgroup"><span class="flabel" data-i18n="projectsSection.filterSkill">Filtrer par compétence</span><select id="skill-filter" class="fselect" aria-label="Filtrer par compétence" data-i18n-attr='{"aria-label":"projectsSection.filterSkill"}'></select></div>
           </div>
           <p class="filter-count" id="filter-count"></p>
           <div class="projects-grid" id="projects-grid"></div>
           <div class="more-gh reveal">
             <a class="btn btn-primary" href="https://github.com/Moutacdie2000?tab=repositories" target="_blank" rel="noopener" style="color:#06141a">
               <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 3.9-1.4 6.8-5.2 6.8-9.7C22 6.6 17.5 2 12 2z"/></svg>
-              Tous mes dépôts sur GitHub
+              <span data-i18n="projectsSection.moreGithub">Tous mes dépôts sur GitHub</span>
             </a>
           </div>
         </div>
@@ -403,34 +407,34 @@
       <section id="education">
         <div class="wrap">
           <div class="reveal">
-            <span class="eyebrow">Formation</span>
-            <h2 class="sec-title">Comment j'en suis arrivé là.</h2>
-            <p class="sec-intro">Un cursus d'ingénierie logicielle doublé d'une spécialisation cloud et DevOps, validée par une certification AWS.</p>
+            <span class="eyebrow" data-i18n="educationSection.eyebrow">Formation</span>
+            <h2 class="sec-title" data-i18n="educationSection.title">Comment j'en suis arrivé là.</h2>
+            <p class="sec-intro" data-i18n="educationSection.intro">Un cursus d'ingénierie logicielle doublé d'une spécialisation cloud et DevOps, validée par une certification AWS.</p>
           </div>
           <div class="edu-grid">
             <article class="edu-card reveal">
-              <span class="edu-date">2025 - en cours</span>
+              <span class="edu-date" data-i18n="educationSection.card1.date">2025 - en cours</span>
               <h3 class="edu-school">Université Protestante d'Afrique Centrale</h3>
-              <p class="edu-degree">Master 2 - Génie Logiciel</p>
-              <span class="edu-meta">Yaoundé, Cameroun</span>
+              <p class="edu-degree" data-i18n="educationSection.card1.degree">Master 2 - Génie Logiciel</p>
+              <span class="edu-meta" data-i18n="educationSection.card1.meta">Yaoundé, Cameroun</span>
             </article>
             <article class="edu-card reveal">
               <span class="edu-date">2022 - 2025</span>
               <h3 class="edu-school">Université Protestante d'Afrique Centrale</h3>
-              <p class="edu-degree">Licence professionnelle - Génie Informatique / Génie Logiciel</p>
-              <span class="edu-meta">Yaoundé, Cameroun</span>
+              <p class="edu-degree" data-i18n="educationSection.card2.degree">Licence professionnelle - Génie Informatique / Génie Logiciel</p>
+              <span class="edu-meta" data-i18n="educationSection.card2.meta">Yaoundé, Cameroun</span>
             </article>
             <article class="edu-card reveal">
               <span class="edu-date">2023 - 2024</span>
               <h3 class="edu-school">WORKETYAMO Training Center</h3>
-              <p class="edu-degree">Programme DevOps &amp; Cloud AWS</p>
-              <span class="edu-meta">Cameroun</span>
+              <p class="edu-degree" data-i18n="educationSection.card3.degree">Programme DevOps &amp; Cloud AWS</p>
+              <span class="edu-meta" data-i18n="educationSection.card3.meta">Cameroun</span>
             </article>
             <article class="edu-card is-cert reveal">
               <span class="edu-date">2024 - 2027</span>
               <h3 class="edu-school">Amazon Web Services</h3>
               <p class="edu-degree">AWS Certified Solutions Architect - Associate</p>
-              <a class="edu-link" href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ed82d2e1d27545f3b35948eacaa0fe36" target="_blank" rel="noopener">Vérifier la certification</a>
+              <a class="edu-link" href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ed82d2e1d27545f3b35948eacaa0fe36" target="_blank" rel="noopener" data-i18n="educationSection.verify">Vérifier la certification</a>
             </article>
           </div>
         </div>
@@ -441,14 +445,14 @@
           <div class="contact reveal">
             <div class="contact-in">
               <span class="eyebrow" style="color:var(--teal-2)">Contact</span>
-              <h2>Construisons quelque chose de fiable</h2>
-              <p>Disponible pour des opportunités en DevOps, Cloud et développement back-end. N'hésitez pas à me contacter.</p>
+              <h2 data-i18n="contact.title">Construisons quelque chose de fiable</h2>
+              <p data-i18n="contact.lead">Disponible pour des opportunités en DevOps, Cloud et développement back-end. N'hésitez pas à me contacter.</p>
               <div class="contact-links">
                 <a class="clink" href="mailto:jordannoumabeu1@gmail.com"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 7L4 6.5V18h16V6.5L12 11z"/></svg>jordannoumabeu1@gmail.com</a>
                 <a class="clink" href="https://www.linkedin.com/in/jordan-noumabeu-moutacdie" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18.3H5.7V9.8h2.6v8.5zM7 8.6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11.3 9.7h-2.6v-4.6c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1-.1.2-.1.5-.1.8v4.6h-2.6V9.8h2.6v1.1c.3-.5 1-1.3 2.4-1.3 1.8 0 3.1 1.2 3.1 3.7v5z"/></svg>LinkedIn</a>
                 <a class="clink" href="https://github.com/Moutacdie2000" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 3.9-1.4 6.8-5.2 6.8-9.7C22 6.6 17.5 2 12 2z"/></svg>GitHub</a>
                 <a class="clink" href="tel:+237676138720"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg>+237 676 138 720</a>
-                <a class="clink" href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ed82d2e1d27545f3b35948eacaa0fe36" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 1l9 4v6c0 5-3.8 9.7-9 11-5.2-1.3-9-6-9-11V5l9-4zm-1 14l6-6-1.4-1.4L11 12.2 8.4 9.6 7 11l4 4z"/></svg>Vérifier ma certification AWS</a>
+                <a class="clink" href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ed82d2e1d27545f3b35948eacaa0fe36" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 1l9 4v6c0 5-3.8 9.7-9 11-5.2-1.3-9-6-9-11V5l9-4zm-1 14l6-6-1.4-1.4L11 12.2 8.4 9.6 7 11l4 4z"/></svg><span data-i18n="contact.verifyAws">Vérifier ma certification AWS</span></a>
               </div>
             </div>
           </div>
@@ -459,32 +463,65 @@
     <div class="modal" id="modal" hidden>
       <div class="modal-overlay" data-close></div>
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="m-title">
-        <button class="modal-x" data-close aria-label="Fermer le détail">&times;</button>
-        <div class="m-thumbwrap" id="m-thumbwrap"><img class="m-thumb" id="m-thumb" alt="" onerror="this.parentElement.style.display='none'" /><span class="m-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M9 3H3v6h2V5h4V3zm12 0h-6v2h4v4h2V3zM5 15H3v6h6v-2H5v-4zm16 0h-2v4h-4v2h6v-6z"/></svg>Agrandir</span></div>
+        <button class="modal-x" data-close aria-label="Fermer le détail" data-i18n-attr='{"aria-label":"modal.closeAria"}'>&times;</button>
+        <div class="m-thumbwrap" id="m-thumbwrap"><img class="m-thumb" id="m-thumb" alt="" onerror="this.parentElement.style.display='none'" /><span class="m-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M9 3H3v6h2V5h4V3zm12 0h-6v2h4v4h2V3zM5 15H3v6h6v-2H5v-4zm16 0h-2v4h-4v2h6v-6z"/></svg><span data-i18n="modal.enlarge">Agrandir</span></span></div>
         <div class="m-top"><span class="pcat" id="m-cat"></span><span class="m-domain" id="m-domain"></span></div>
         <h3 id="m-title"></h3>
         <p class="m-long" id="m-long"></p>
-        <div class="m-section"><h4>Points clés</h4><ul id="m-highlights"></ul></div>
-        <div class="m-section"><h4>Compétences & technologies liées</h4><div class="chips" id="m-skills"></div></div>
+        <div class="m-section"><h4 data-i18n="modal.highlights">Points clés</h4><ul id="m-highlights"></ul></div>
+        <div class="m-section"><h4 data-i18n="modal.skillsTech">Compétences & technologies liées</h4><div class="chips" id="m-skills"></div></div>
         <div class="m-links" id="m-links"></div>
       </div>
     </div>
 
     <div class="lightbox" id="lightbox" hidden>
-      <button class="lb-x" data-lbclose aria-label="Fermer l'image">&times;</button>
-      <img id="lb-img" alt="Image du projet en grand" />
+      <button class="lb-x" data-lbclose aria-label="Fermer l'image" data-i18n-attr='{"aria-label":"modal.closeImage"}'>&times;</button>
+      <img id="lb-img" alt="Image du projet en grand" data-i18n-attr='{"alt":"modal.imgAlt"}' />
     </div>
 
     <footer>
       <div class="wrap">
         <span class="mono">NM</span>
-        <p>Noumabeu Moutacdie Jordan · Ingénieur DevOps & Cloud · Développeur Backend & Full-stack</p>
-        <p style="margin-top:6px">Conçu et développé par mes soins · <span id="year"></span> · Hébergé sur GitHub Pages</p>
+        <p data-i18n="footer.role">Noumabeu Moutacdie Jordan · Ingénieur DevOps & Cloud · Développeur Backend & Full-stack</p>
+        <p style="margin-top:6px"><span data-i18n="footer.madeBy1">Conçu et développé par mes soins</span> · <span id="year"></span> · <span data-i18n="footer.madeBy2">Hébergé sur GitHub Pages</span></p>
       </div>
     </footer>
 
+    <script src="assets/js/i18n.js"></script>
     <script>
       document.documentElement.classList.add("js");
+
+      // ----- Internationalisation FR / EN (bootstrap) -----
+      const I18N = window.I18N || { ui: {}, techCategories: {}, cats: {}, roles: {}, experience: [], projects: {} };
+      const deepGet = (obj, path) => path.split(".").reduce((o, k) => (o && o[k] != null ? o[k] : undefined), obj);
+      const T = (path) => (lang === "en" ? deepGet(I18N.ui, path) : undefined);
+      const enOr = (key, dict, fallback) => (lang === "en" && dict && dict[key] != null ? dict[key] : fallback);
+      const detectLang = () => {
+        const stored = localStorage.getItem("lang");
+        if (stored === "en" || stored === "fr") return stored;
+        return navigator.language && navigator.language.toLowerCase().startsWith("fr") ? "fr" : "en";
+      };
+      let lang = detectLang();
+      document.documentElement.lang = lang;
+      function applyStaticI18n() {
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          if (node.dataset.i18nFr === undefined) node.dataset.i18nFr = node.innerHTML;
+          const val = T(node.getAttribute("data-i18n"));
+          node.innerHTML = val != null ? val : node.dataset.i18nFr;
+        });
+        document.querySelectorAll("[data-i18n-attr]").forEach((node) => {
+          let map;
+          try { map = JSON.parse(node.getAttribute("data-i18n-attr")); } catch (e) { return; }
+          Object.keys(map).forEach((attr) => {
+            const frAttr = "data-fr-" + attr;
+            if (!node.hasAttribute(frAttr)) node.setAttribute(frAttr, node.getAttribute(attr) || "");
+            const val = T(map[attr]);
+            node.setAttribute(attr, val != null ? val : node.getAttribute(frAttr));
+          });
+        });
+      }
+      applyStaticI18n();
+
       // ----- Data -----
       // Technologies avec logos (devicon). [nom, slug, variante]
       const TECH = [
@@ -668,22 +705,36 @@
 
       const sg = document.getElementById("tech-grid");
       const devicon = (slug, v) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${slug}/${slug}-${v}.svg`;
-      TECH.forEach(([name, items]) => {
-        const block = el("div", "tech-block reveal");
-        const tiles = items.map(([n, slug, v]) => {
-          const src = slug.startsWith("http") ? slug : devicon(slug, v);
-          return `<div class="tech"><img src="${src}" alt="${n}" loading="lazy" onerror="this.style.display='none'"><span>${n}</span></div>`;
-        }).join("");
-        block.innerHTML = `<div class="tlabel">${name}</div><div class="tech-row">${tiles}</div>`;
-        sg.appendChild(block);
-      });
+      function renderSkills(isRerender) {
+        sg.innerHTML = "";
+        TECH.forEach(([name, items]) => {
+          const block = el("div", "tech-block reveal" + (isRerender ? " in" : ""));
+          const label = enOr(name, I18N.techCategories, name);
+          const tiles = items.map(([n, slug, v]) => {
+            const src = slug.startsWith("http") ? slug : devicon(slug, v);
+            return `<div class="tech"><img src="${src}" alt="${n}" loading="lazy" onerror="this.style.display='none'"><span>${n}</span></div>`;
+          }).join("");
+          block.innerHTML = `<div class="tlabel">${label}</div><div class="tech-row">${tiles}</div>`;
+          sg.appendChild(block);
+        });
+      }
+      renderSkills(false);
 
       const tl = document.getElementById("timeline");
-      EXPERIENCE.forEach(([role, co, date, bullets]) => {
-        const it = el("div", "tl-item reveal");
-        it.innerHTML = `<div class="tl-head"><div><span class="tl-role">${role}</span> · <span class="tl-co">${co}</span></div><span class="tl-date">${date}</span></div><ul>${bullets.map(b => `<li>${b}</li>`).join("")}</ul>`;
-        tl.appendChild(it);
-      });
+      function renderExperience(isRerender) {
+        tl.innerHTML = "";
+        EXPERIENCE.forEach(([role, co, date, bullets], i) => {
+          const enE = lang === "en" ? I18N.experience[i] : null;
+          const R = (enE && enE.role) || role;
+          const C = (enE && enE.co) || co;
+          const D = (enE && enE.date) || date;
+          const B = (enE && enE.bullets) || bullets;
+          const it = el("div", "tl-item reveal" + (isRerender ? " in" : ""));
+          it.innerHTML = `<div class="tl-head"><div><span class="tl-role">${R}</span> · <span class="tl-co">${C}</span></div><span class="tl-date">${D}</span></div><ul>${B.map(b => `<li>${b}</li>`).join("")}</ul>`;
+          tl.appendChild(it);
+        });
+      }
+      renderExperience(false);
 
       const codeIco = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 3.9-1.4 6.8-5.2 6.8-9.7C22 6.6 17.5 2 12 2z"/></svg>';
       const demoIco = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.6l-9.3 9.3 1.4 1.4L19 6.4V10h2V3h-7zM5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z"/></svg>';
@@ -692,14 +743,19 @@
       function projectCard(p) {
         const c = el("div", "pcard reveal in");
         c.style.setProperty("--cat", CATCOLOR[p.cat]);
-        c.tabIndex = 0; c.setAttribute("role", "button"); c.setAttribute("aria-label", "Voir le détail du projet " + p.title);
-        const feat = p.feat ? `<span class="pfeat">★ Mis en avant</span>` : "";
-        c.innerHTML = `<img class="pthumb" src="assets/projects/${slugOf(p)}.png" alt="Aperçu du projet ${p.title}" decoding="async" onerror="this.style.display='none'">
+        const enP = lang === "en" ? I18N.projects[slugOf(p)] : null;
+        const desc = (enP && enP.desc) || p.desc;
+        const catLabel = enOr(p.cat, I18N.cats, CATS[p.cat]);
+        const previewAlt = (T("projectsSection.previewAlt") || "Aperçu du projet") + " " + p.title;
+        const viewDetailAria = (T("projectsSection.viewDetailAriaPrefix") || "Voir le détail du projet") + " " + p.title;
+        c.tabIndex = 0; c.setAttribute("role", "button"); c.setAttribute("aria-label", viewDetailAria);
+        const feat = p.feat ? `<span class="pfeat">&#9733; ${T("projectsSection.featured") || "Mis en avant"}</span>` : "";
+        c.innerHTML = `<img class="pthumb" src="assets/projects/${slugOf(p)}.png" alt="${previewAlt}" decoding="async" onerror="this.style.display='none'">
           <div class="pbody">
-            <div class="ptop"><span class="pcat">${CATS[p.cat]}</span>${feat}</div>
-            <h3>${p.title}</h3><p class="pdesc">${p.desc}</p>
+            <div class="ptop"><span class="pcat">${catLabel}</span>${feat}</div>
+            <h3>${p.title}</h3><p class="pdesc">${desc}</p>
             <div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join("")}</div>
-            <div class="phint">Voir le détail ${arrowIco}</div>
+            <div class="phint">${T("projectsSection.viewDetail") || "Voir le détail"} ${arrowIco}</div>
           </div>`;
         c.onclick = () => openProject(p);
         c.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProject(p); } };
@@ -707,6 +763,10 @@
       }
       let curRole = "all", curSkill = "all";
       const countEl = document.getElementById("filter-count");
+      function countSentence(n, filtered) {
+        if (lang === "en") return `${n} project${n === 1 ? "" : "s"} shown${filtered ? " (filtered)" : ""}`;
+        return `${n} projet${n > 1 ? "s" : ""} affiché${n > 1 ? "s" : ""}${filtered ? " (filtré)" : ""}`;
+      }
       function renderProjects() {
         const list = PROJECTS.filter(p =>
           (curRole === "all" || (ROLE_MAP[curRole] || []).includes(slugOf(p))) &&
@@ -714,24 +774,34 @@
         grid.innerHTML = "";
         list.forEach(p => grid.appendChild(projectCard(p)));
         const filtered = curRole !== "all" || curSkill !== "all";
-        countEl.innerHTML = `<span>${list.length} projet${list.length > 1 ? "s" : ""} affiché${list.length > 1 ? "s" : ""}${filtered ? " (filtré)" : ""}</span>`;
+        countEl.innerHTML = `<span>${countSentence(list.length, filtered)}</span>`;
         if (filtered) {
-          const r = el("button", "freset", "Réinitialiser les filtres");
+          const r = el("button", "freset", T("projectsSection.resetFilters") || "Réinitialiser les filtres");
           r.onclick = () => { curRole = "all"; curSkill = "all"; skillSel.value = "all"; roleWrap.querySelectorAll(".filter").forEach(f => f.classList.toggle("active", f.dataset.role === "all")); renderProjects(); };
           countEl.appendChild(r);
         }
-        if (!list.length) grid.innerHTML = `<p style="grid-column:1/-1;color:var(--muted)">Aucun projet ne correspond à cette combinaison de filtres.</p>`;
+        if (!list.length) grid.innerHTML = `<p style="grid-column:1/-1;color:var(--muted)">${T("projectsSection.noMatch") || "Aucun projet ne correspond à cette combinaison de filtres."}</p>`;
       }
       const roleWrap = document.getElementById("role-filters");
-      Object.entries(ROLES).forEach(([k, label], i) => {
-        const b = el("button", "filter" + (i === 0 ? " active" : ""), label);
-        b.dataset.role = k;
-        b.onclick = () => { curRole = k; roleWrap.querySelectorAll(".filter").forEach(f => f.classList.toggle("active", f.dataset.role === k)); renderProjects(); };
-        roleWrap.appendChild(b);
-      });
+      function renderRoleFilters() {
+        roleWrap.innerHTML = "";
+        Object.entries(ROLES).forEach(([k, label]) => {
+          const l = enOr(k, I18N.roles, label);
+          const b = el("button", "filter" + (k === curRole ? " active" : ""), l);
+          b.dataset.role = k;
+          b.onclick = () => { curRole = k; roleWrap.querySelectorAll(".filter").forEach(f => f.classList.toggle("active", f.dataset.role === k)); renderProjects(); };
+          roleWrap.appendChild(b);
+        });
+      }
+      renderRoleFilters();
       const skillSel = document.getElementById("skill-filter");
       const SKILL_FILTERS = ["AWS", "Terraform", "Kubernetes", "Docker", "Helm", "ArgoCD", "GitOps", "CI/CD", "GitHub Actions", "Serverless", "Lambda", "Prometheus", "DevSecOps", "Python", "Django", "Celery", ".NET", "C#", "Node.js", "NestJS", "TypeScript", "React", "Next.js", "Astro", "WebSocket", "PostgreSQL", "Redis", "Prisma", "Odoo", "Stripe", "JWT", "RBAC", "D3", "C++"].sort((a, b) => a.localeCompare(b, "fr"));
-      skillSel.innerHTML = `<option value="all">Toutes les compétences</option>` + SKILL_FILTERS.map(s => `<option value="${s}">${s}</option>`).join("");
+      function renderSkillSelect() {
+        const allLabel = T("projectsSection.allSkills") || "Toutes les compétences";
+        skillSel.innerHTML = `<option value="all">${allLabel}</option>` + SKILL_FILTERS.map(s => `<option value="${s}">${s}</option>`).join("");
+        skillSel.value = curSkill;
+      }
+      renderSkillSelect();
       skillSel.onchange = () => { curSkill = skillSel.value; renderProjects(); };
       renderProjects();
 
@@ -739,15 +809,19 @@
       const modal = document.getElementById("modal");
       function openProject(p) {
         modal.style.setProperty("--cat", CATCOLOR[p.cat]);
+        const enP = lang === "en" ? I18N.projects[slugOf(p)] : null;
+        const domain = (enP && enP.domain) || p.domain || "";
+        const long = (enP && enP.long) || p.long || p.desc;
+        const highlights = (enP && enP.highlights) || p.highlights || [];
         document.getElementById("m-thumbwrap").style.display = ""; document.getElementById("m-thumb").src = "assets/projects/" + slugOf(p) + ".png";
-        document.getElementById("m-cat").textContent = CATS[p.cat];
-        document.getElementById("m-domain").textContent = p.domain || "";
+        document.getElementById("m-cat").textContent = enOr(p.cat, I18N.cats, CATS[p.cat]);
+        document.getElementById("m-domain").textContent = domain;
         document.getElementById("m-title").textContent = p.title;
-        document.getElementById("m-long").textContent = p.long || p.desc;
-        document.getElementById("m-highlights").innerHTML = (p.highlights || []).map(h => `<li>${h}</li>`).join("");
+        document.getElementById("m-long").textContent = long;
+        document.getElementById("m-highlights").innerHTML = highlights.map(h => `<li>${h}</li>`).join("");
         document.getElementById("m-skills").innerHTML = (p.skills || p.tags).map(s => `<span class="chip">${s}</span>`).join("");
-        const demo = p.demo ? `<a class="plink demo" href="${p.demo}" target="_blank" rel="noopener">${demoIco}Voir la démo</a>` : "";
-        const code = p.repo ? `<a class="plink code" href="${GH + p.repo}" target="_blank" rel="noopener">${codeIco}Code source</a>` : "";
+        const demo = p.demo ? `<a class="plink demo" href="${p.demo}" target="_blank" rel="noopener">${demoIco}${T("modal.viewDemo") || "Voir la démo"}</a>` : "";
+        const code = p.repo ? `<a class="plink code" href="${GH + p.repo}" target="_blank" rel="noopener">${codeIco}${T("modal.sourceCode") || "Code source"}</a>` : "";
         document.getElementById("m-links").innerHTML = `${code}${demo}`;
         modal.hidden = false; document.body.classList.add("modal-open");
         modal.querySelector(".modal-card").scrollTop = 0;
@@ -859,6 +933,35 @@
           });
         }, { rootMargin: "-45% 0px -50% 0px" });
         secs.forEach(sec => obs.observe(sec));
+      })();
+
+      // ----- Selecteur de langue FR / EN -----
+      (() => {
+        const btn = document.getElementById("lang-toggle");
+        if (!btn) return;
+        const cvLink = document.getElementById("cv-download");
+        function paint() {
+          btn.textContent = lang === "fr" ? "EN" : "FR";
+          const label = lang === "fr" ? "Passer le site en anglais" : "Switch site to French";
+          btn.setAttribute("aria-label", label);
+          btn.title = label;
+          if (cvLink) cvLink.href = lang === "en" ? "assets/cv/cv-general-en.pdf" : "assets/cv/cv-general.pdf";
+        }
+        function setLanguage(next) {
+          if (next === lang) return;
+          lang = next;
+          localStorage.setItem("lang", lang);
+          document.documentElement.lang = lang;
+          applyStaticI18n();
+          renderSkills(true);
+          renderExperience(true);
+          renderRoleFilters();
+          renderSkillSelect();
+          renderProjects();
+          paint();
+        }
+        btn.addEventListener("click", () => setLanguage(lang === "fr" ? "en" : "fr"));
+        paint();
       })();
     </script>
   </body>
