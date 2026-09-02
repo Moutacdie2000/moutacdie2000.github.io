@@ -134,7 +134,7 @@ window.I18N = {
   experience: [
     {
       role: "DevOps Consultant & Backend Developer",
-      co: "Corextreme Technologies",
+      co: "ROISBET",
       date: "Jan. 2026 - Present",
       bullets: [
         "High-load sports betting & gaming platform: distributed architecture of 35 microservices in production.",
